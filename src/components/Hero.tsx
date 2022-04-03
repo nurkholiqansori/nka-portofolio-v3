@@ -6,9 +6,9 @@ import {
   Stack,
   Text,
   Link as ChakraLink,
-  SimpleGrid,
   Box,
   Icon,
+  Center,
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
@@ -52,7 +52,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   }
 
   return (
-    <Box px='1rem'>
+    <Box px='1rem' mx='auto' maxWidth='container.sm'>
       <Flex
         bgGradient='linear(to-l, #7928CA, #FF0080)'
         bgClip='text'
@@ -63,14 +63,8 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
           Welcome to my personal website
         </Heading>
       </Flex>
-      <SimpleGrid
-        columns={[1, null, 2]}
-        mx='auto'
-        my='20'
-        px='1rem'
-        spacing='10'
-      >
-        <Box>
+      <Box my='20' px='1rem'>
+        <Center flexDirection='column'>
           <Flex justifyContent='center'>
             {avatarUrl ? (
               <Avatar size='2xl' name={name} src={avatarUrl} />
@@ -78,7 +72,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
               <SkeletonCircle size='30' />
             )}
           </Flex>
-          <Stack fontSize='md' maxWidth='container.sm' my='10'>
+          <Stack fontSize='md' my='10'>
             <ReactMarkdown
               remarkPlugins={[remarkHtml]}
               rehypePlugins={[rehypeSanitize]}
@@ -92,40 +86,44 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
               {readme}
             </ReactMarkdown>
           </Stack>
+        </Center>
+        <Box mx='auto'>
+          <Flex alignItems='center' gap='5'>
+            <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z'
+              />
+            </Icon>
+            {data.birthPlace}
+          </Flex>
+          <Flex alignItems='center' gap='5'>
+            <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+              />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+              />
+            </Icon>
+            {location}
+          </Flex>
+          <Text>
+            Id culpa enim irure deserunt occaecat qui ea in. Fugiat do est elit
+            duis officia nisi dolor aliqua. Qui laborum dolor excepteur ex
+            laboris aute adipisicing sit ut amet officia. In eu magna mollit
+            laborum aliqua ut labore aute excepteur.{' '}
+          </Text>
         </Box>
-        <Box>
-          <Stack spacing='5'>
-            <Box>
-              <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z'
-                />
-              </Icon>
-              {data.birthPlace}
-            </Box>
-            <Box>
-              <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
-                />
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
-                />
-              </Icon>
-              {location}
-            </Box>
-          </Stack>
-        </Box>
-      </SimpleGrid>
+      </Box>
     </Box>
   )
 }
