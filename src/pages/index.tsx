@@ -20,9 +20,11 @@ const Index = () => {
     [key: string]: string
     avatar_url: string
     name: string
+    location: string
   }>({
     avatar_url: '',
     name: '',
+    location: '',
   })
   const [dataReadme, setDataReadme] = React.useState<{
     [key: string]: string
@@ -52,7 +54,7 @@ const Index = () => {
     <Container>
       <Hero apiProfile={dataProfile} apiReadme={dataReadme} />
       <Main>
-        <Text>
+        {/* <Text>
           Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code> +{' '}
           <Code>TypeScript</Code>.
         </Text>
@@ -80,7 +82,7 @@ const Index = () => {
               Next.js <LinkIcon />
             </ChakraLink>
           </ListItem>
-        </List>
+        </List> */}
       </Main>
 
       <DarkModeSwitch />

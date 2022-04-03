@@ -8,16 +8,19 @@ import {
   Link as ChakraLink,
   SimpleGrid,
   Box,
+  Icon,
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkHtml from 'remark-html'
+import { data } from '../api/data'
 
 type HeroProps = {
   title: string
   apiProfile: {
     avatar_url: string
     name: string
+    location: string
   }
   apiReadme: {
     content: string
@@ -27,6 +30,7 @@ type HeroProps = {
 export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   const avatarUrl = apiProfile.avatar_url
   const name = apiProfile.name
+  const location = apiProfile.location
 
   const readme = Buffer.from(apiReadme.content, 'base64').toString('utf-8')
 
@@ -49,12 +53,23 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
 
   return (
     <Box px='1rem'>
-      <Flex bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text' mb='10' mt='20'>
+      <Flex
+        bgGradient='linear(to-l, #7928CA, #FF0080)'
+        bgClip='text'
+        mb='10'
+        mt='20'
+      >
         <Heading fontSize='6vw' textAlign='center'>
           Welcome to my personal website
         </Heading>
       </Flex>
-      <SimpleGrid columns={[1, null, 2]} mx='auto' my='20' px='1rem'>
+      <SimpleGrid
+        columns={[1, null, 2]}
+        mx='auto'
+        my='20'
+        px='1rem'
+        spacing='10'
+      >
         <Box>
           <Flex justifyContent='center'>
             {avatarUrl ? (
@@ -78,7 +93,38 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             </ReactMarkdown>
           </Stack>
         </Box>
-        <Box>Social</Box>
+        <Box>
+          <Stack spacing='5'>
+            <Box>
+              <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z'
+                />
+              </Icon>
+              {data.birthPlace}
+            </Box>
+            <Box>
+              <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                />
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                />
+              </Icon>
+              {location}
+            </Box>
+          </Stack>
+        </Box>
       </SimpleGrid>
     </Box>
   )
