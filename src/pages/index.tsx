@@ -7,30 +7,28 @@ import {
   ListItem,
 } from '@chakra-ui/react'
 import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
-
 import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
 import React from 'react'
 
 const Index = () => {
   const [dataRepo, setDataRepo] = React.useState<{ [key: string]: string }>({})
   const [dataProfile, setDataProfile] = React.useState<{
-    [key: string]: string,
-    avatar_url: string,
+    [key: string]: string
+    avatar_url: string
     name: string
   }>({
     avatar_url: '',
-    name: ''
+    name: '',
   })
   const [dataReadme, setDataReadme] = React.useState<{
     [key: string]: string
     content: string
   }>({
-    content: ''
+    content: '',
   })
 
   React.useEffect(() => {
@@ -91,7 +89,6 @@ const Index = () => {
         <Text>Powered by Vercel</Text>
         <Text>Nur Kholiq Ansori</Text>
       </Footer>
-      <CTA />
     </Container>
   )
 }

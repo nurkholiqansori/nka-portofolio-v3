@@ -6,6 +6,8 @@ import {
   Stack,
   Text,
   Link as ChakraLink,
+  SimpleGrid,
+  Box,
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
@@ -40,49 +42,45 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   const Paragraph = ({ node, ...props }: any) => {
     const { children } = props
     if (children && children[0].props && children[0].props.src) {
-      return (
-        <Flex
-          gap='2'
-          flexWrap='wrap'
-          justifyContent='center'
-          {...props}
-        />
-      )
+      return <Flex gap='2' flexWrap='wrap' justifyContent='center' {...props} />
     }
     return <Text as='p' align='justify' {...props} />
   }
 
   return (
-    <Flex
-      justifyContent='center'
-      alignItems='center'
-      flexDirection='column'
-      my='20'
-      px='1rem'
-    >
-      {avatarUrl ? (
-        <Avatar size='2xl' name={name} src={avatarUrl} />
-      ) : (
-        <SkeletonCircle size='30  ' />
-      )}
-      <Flex bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text'>
-        <Heading fontSize='6vw'>{title}</Heading>
+    <Box px='1rem'>
+      <Flex bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text' mb='10' mt='20'>
+        <Heading fontSize='6vw' textAlign='center'>
+          Welcome to my personal website
+        </Heading>
       </Flex>
-      <Stack fontSize='md' maxWidth='container.sm' my='10'>
-        <ReactMarkdown
-          remarkPlugins={[remarkHtml]}
-          rehypePlugins={[rehypeSanitize]}
-          components={{
-            h1: H1,
-            h2: H2,
-            a: Linked,
-            p: Paragraph,
-          }}
-        >
-          {readme}
-        </ReactMarkdown>
-      </Stack>
-    </Flex>
+      <SimpleGrid columns={[1, null, 2]} mx='auto' my='20' px='1rem'>
+        <Box>
+          <Flex justifyContent='center'>
+            {avatarUrl ? (
+              <Avatar size='2xl' name={name} src={avatarUrl} />
+            ) : (
+              <SkeletonCircle size='30' />
+            )}
+          </Flex>
+          <Stack fontSize='md' maxWidth='container.sm' my='10'>
+            <ReactMarkdown
+              remarkPlugins={[remarkHtml]}
+              rehypePlugins={[rehypeSanitize]}
+              components={{
+                h1: H1,
+                h2: H2,
+                a: Linked,
+                p: Paragraph,
+              }}
+            >
+              {readme}
+            </ReactMarkdown>
+          </Stack>
+        </Box>
+        <Box>Social</Box>
+      </SimpleGrid>
+    </Box>
   )
 }
 
