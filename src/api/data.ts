@@ -42,7 +42,7 @@ export const data = {
     },
     {
       id: 4,
-      name: 'My Website on Vercel',
+      name: 'My Website',
       color: '000000',
       link: 'https://www.nurkholiqansori.me',
       path: 'M24 22.525H0l12-21.05 12 21.05z',
@@ -82,7 +82,7 @@ export const data = {
       status: 'Partime',
       address: 'https://www.mitraboltingrental.com/',
       logo: '/doc/Logo/mitrajavasinergi.png',
-      img: 'mitraboltingrental.png',
+      img: '/doc/mitraboltingrental.png',
       build: 'wordpress',
     },
     {
@@ -121,7 +121,7 @@ export const data = {
     {
       id: 1,
       title: 'Web Developer',
-      com: 'Ta’limy Ali bin Abi Thalib',
+      com: 'Ta\’limy Ali bin Abi Thalib',
       date: 'Sep 2020 hingga Mar 2021',
       status: 'Partime',
       address: 'https://talimyabat.id',
@@ -142,6 +142,117 @@ export const data = {
       title: 'IPS',
       sch: 'SMAN 8 Bekasi',
       date: '2016 until 2019',
+    },
+  ],
+  personalProjects: [
+    // {
+    //   id: 6,
+    //   title: 'MERN (Mongo Express.js React.js Node.js) Course',
+    //   address: 'https://mern-lecturer.vercel.app/',
+    //   img: '/doc/project/mern.png',
+    //   date: 'Mar. 2022',
+    //   repo: 'https://github.com/nurkholiqansori/MERN-Lecturer'
+    // },
+    {
+      id: 5,
+      title: 'MyAnimeList Gallery',
+      address: 'https://simple-gallery-my-anime-list.vercel.app/',
+      img: '/doc/project/anime.png',
+      date: 'Jan. 2022',
+      repo: 'https://github.com/nurkholiqansori/simpleGalleryMyAnimeList',
+      build: [
+        {
+          name: 'nextjs',
+        },
+        {
+          name: 'styledcomponents',
+        },
+        {
+          name: 'materialui'
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: 'Personal Website v1',
+      address: 'https://my-cv-new.vercel.app/',
+      img: '/doc/project/nka-portofolio-v1.png',
+      date: 'Dec. 2022',
+      repo: 'https://github.com/nurkholiqansori/myProfile',
+      build: [
+        {
+          name: 'nextjs',
+        },
+        {
+          name: 'tailwindcss'
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: 'Final Project at NGOding BAReng (NGOBAR) workshop',
+      address: 'http://nurkholiqansori.github.io/myProfile',
+      img: '/doc/project/ngobar.png',
+      date: 'Agu. 2022',
+      repo: 'https://github.com/nurkholiqansori/myProfile',
+      build: [
+        {
+          name: 'html5'
+        },
+        {
+          name: 'css3'
+        },
+        {
+          name: 'javascript'
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Personal Website v2',
+      address: 'https://mern-lecturer.vercel.app/',
+      img: '/doc/project/nka-portofolio-v2.png',
+      date: 'Mar. 2022',
+      repo: 'https://github.com/nurkholiqansori/MERN-Lecturer',
+      build: [
+        {
+          name: 'nextjs'
+        },
+        {
+          name: 'typescript'
+        },
+        {
+          name: 'tailwindcss'
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: 'MERN (Mongo Express.js React.js Node.js) Course',
+      address: 'https://mern-lecturer.vercel.app/',
+      img: '/doc/project/mern.png',
+      date: 'Mar. 2022',
+      repo: 'https://github.com/nurkholiqansori/MERN-Lecturer',
+      build: [
+        {
+          name: 'reactjs'
+        },
+        {
+          name: 'express'
+        },
+        {
+          name: 'tailwindcss'
+        },
+        {
+          name: 'reactrouterdom'
+        },
+        {
+          name: 'mongodb'
+        },
+        {
+          name: 'nodejs'
+        }
+      ],
     },
   ],
   skill: [

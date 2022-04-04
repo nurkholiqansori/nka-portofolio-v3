@@ -9,6 +9,8 @@ import {
   Box,
   Icon,
   Center,
+  Button,
+  IconButton,
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
@@ -123,6 +125,38 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             laborum aliqua ut labore aute excepteur.{' '}
           </Text>
         </Box>
+        <Stack justifyContent='center' flexWrap='wrap' direction='row' gap='5' align='center' my='10'>
+          {data.socMed.map((i) => (
+            <ChakraLink
+            key={i.name}
+              href={i.link}
+              isExternal
+              mr={2}
+              textColor='#ffffff'
+              fontSize='30'
+              bgColor={'#' + i.color}
+              borderRadius='10px'
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <Button
+                colorScheme={'#' + i.color}
+                leftIcon={
+                  <Icon fill='#ffffff' viewBox='0 0 24 24' fontSize='20' stroke='none'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d={i.path}
+                    />
+                  </Icon>
+                }
+              >
+                {i.name}
+              </Button>
+            </ChakraLink>
+          ))}
+        </Stack>
       </Box>
     </Box>
   )
