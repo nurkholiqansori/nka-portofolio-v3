@@ -249,7 +249,6 @@ const Index = () => {
                   <Heading as='h3' size='md'>
                     {i.title}
                   </Heading>
-                  <Text as='p'>{i.address}</Text>
                   <Text as='p'>Develop on {i.date}</Text>
                   <Text as='p'>
                     Build with:{' '}
