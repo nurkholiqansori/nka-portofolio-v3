@@ -8,6 +8,7 @@ import {
   Button,
   Icon,
   Badge,
+  Center,
 } from '@chakra-ui/react'
 import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
@@ -17,6 +18,7 @@ import { Footer } from '../components/Footer'
 import React from 'react'
 import { data } from '../api/data'
 import { siGithub } from 'simple-icons/icons'
+import Link from 'next/link'
 
 const iconBuild = [
   {
@@ -97,11 +99,38 @@ const iconBuild = [
     },
   },
 ]
+const iconProvider = [
+  {
+    name: 'Sololearn',
+    path: 'M18.621 16.084a8.483 8.483 0 0 1-2.922 6.427c-.603.53-.19 1.522.613 1.442a9.039 9.039 0 0 0 1.587-.3 8.32 8.32 0 0 0 5.787-5.887 8.555 8.555 0 0 0-8.258-10.832 9.012 9.012 0 0 0-1.045.06c-.794.1-.995 1.161-.29 1.542 2.701 1.452 4.53 4.285 4.53 7.548zM7.906 18.597a8.538 8.538 0 0 1-6.45-2.913c-.532-.6-1.527-.19-1.446.61a8.943 8.943 0 0 0 .3 1.582c.794 2.823 3.064 5.026 5.907 5.766 5.727 1.492 10.87-2.773 10.87-8.229 0-.35-.02-.7-.06-1.04-.1-.792-1.165-.992-1.547-.29a8.597 8.597 0 0 1-7.574 4.514zM5.382 7.916a8.483 8.483 0 0 1 2.924-6.427c.603-.531.19-1.522-.613-1.442a9.93 9.93 0 0 0-1.598.29A8.339 8.339 0 0 0 .31 6.224a8.555 8.555 0 0 0 8.258 10.832c.352 0 .704-.02 1.045-.06.794-.1.995-1.162.29-1.542a8.54 8.541 0 0 1-4.52-7.538zm10.72-2.513a8.538 8.538 0 0 1 6.45 2.913c.53.6 1.526.19 1.445-.61a8.945 8.945 0 0 0-.3-1.583C22.902 3.3 20.632 1.098 17.788.357 12.071-1.145 6.928 3.12 6.928 8.576c0 .35.02.7.06 1.041.1.791 1.168.991 1.549.29A8.58 8.58 0 0 1 16.1 5.404z',
+    color: '#149EF2',
+  },
+  {
+    name: 'Udemy',
+    path: 'M12 0L5.81 3.573v3.574l6.189-3.574 6.191 3.574V3.573zM5.81 10.148v8.144c0 1.85.589 3.243 1.741 4.234S10.177 24 11.973 24s3.269-.482 4.448-1.474c1.179-.991 1.768-2.439 1.768-4.314v-8.064h-3.242v7.85c0 2.036-1.509 3.055-2.948 3.055-1.428 0-2.947-.991-2.947-3.027v-7.878z',
+    color: '#A435F0',
+  },
+  {
+    name: 'ProgrammingHub',
+    path: '',
+    color: '',
+  },
+  {
+    name: 'HackerRank',
+    path: 'M0 0v24h24V0zm9.95 8.002h1.805c.061 0 .111.05.111.111v7.767c0 .061-.05.111-.11.111H9.95c-.061 0-.111-.05-.111-.11v-2.87H7.894v2.87c0 .06-.05.11-.11.11H5.976a.11.11 0 01-.11-.11V8.112c0-.06.05-.11.11-.11h1.806c.061 0 .11.05.11.11v2.869H9.84v-2.87c0-.06.05-.11.11-.11zm2.999 0h5.778c.061 0 .111.05.111.11v7.767a.11.11 0 01-.11.112h-5.78a.11.11 0 01-.11-.11V8.111c0-.06.05-.11.11-.11z',
+    color: '#00EA64',
+  },
+  {
+    name: 'Progate',
+    path: 'M10.056 24a17.14 17.14 0 01-3.457-.698c-1.244-.364-2.899-1-2.913-2.319 0-.946.54-1.755 1.675-2.477a15.827 15.827 0 011.6-.844 39.6 39.6 0 012.2-.928V4.98l-4.41-.476v12.652a.848.848 0 01-.895.846.85.85 0 01-.904-.846V3.496a.906.906 0 01.904-.903.8.8 0 01.096.014l6.198.67a.902.902 0 01.8.9v11.826a61.194 61.194 0 002.399-1.03c2.27-1.036 3.799-2.091 4.668-3.237 1.056-1.374 1.218-3.075 1.168-4.259a6.264 6.264 0 00-1.254-3.515 5.498 5.498 0 00-2.095-1.725 6.208 6.208 0 00-1.663-.486c-.6-.082-.896-.51-.864-.938.032-.427.384-.75.888-.8.863-.071 1.503.147 2.375.536a7.76 7.76 0 012.86 2.32 8.167 8.167 0 011.6 4.522 8.967 8.967 0 01-.485 3.481 7.36 7.36 0 01-1.088 1.966c-1.584 2.065-4.39 3.34-5.31 3.764-.868.4-2.8 1.2-3.18 1.352V23.1a.908.908 0 01-.31.682.918.918 0 01-.567.218zm-.896-5.318c-.552.2-1.4.512-1.72.66-.32.147-1.215.565-1.61.91-.1.085-.417.385-.339.629.078.244.446.374 1.904.766.518.14 1.125.274 1.765.4z',
+    color: '#380953',
+  },
+]
 
 const Index = () => {
   const [dataRepo, setDataRepo] = React.useState<
-    [{ name: string; description: string; topics: [string] }]
-  >([{ name: '', description: '', topics: [''] }])
+    [{ name: string; description: string; topics: [string]; homepage: string }]
+  >([{ name: '', description: '', topics: [''], homepage: '' }])
   const [dataProfile, setDataProfile] = React.useState<{
     [key: string]: string
     avatar_url: string
@@ -135,12 +164,12 @@ const Index = () => {
   }, [])
 
   console.log(dataRepo, dataProfile, dataReadme)
-  
 
   return (
     <Container>
       <Hero apiProfile={dataProfile} apiReadme={dataReadme} />
       <Main>
+        <div id='portofolio'></div>
         <Heading as='h2' mb='10' textAlign='center'>
           Portofolio
         </Heading>
@@ -152,14 +181,14 @@ const Index = () => {
               overflow='hidden'
               key={i.com}
             >
-              <Box overflow='hidden' maxHeight='md'>
+              <Box overflow='hidden'>
                 <ChakraImage src={i.img} title={i.title + ' at ' + i.com} />
               </Box>
               <Box p='6'>
                 <Heading as='h3' size='md'>
                   {i.com}
                 </Heading>
-                <Text as='p'>{i.address}</Text>
+                <Text as='p'>Develop at {i.date}</Text>
                 <Text as='p'>
                   Build with{' '}
                   <Icon
@@ -177,16 +206,18 @@ const Index = () => {
                   </Icon>
                 </Text>
                 <Box mt='5'>
-                  <Button colorScheme='#f00000' size='md'>
-                    {' '}
-                    Visit{' '}
-                  </Button>
+                  <Link href={i.address}>
+                    <a target='_blank' rel='noreferrer nofollow'>
+                      <Button size='md'> Visit </Button>
+                    </a>
+                  </Link>
                 </Box>
               </Box>
             </Box>
           ))}
         </Stack>
         <Stack>
+          <div id='personal-project'></div>
           <Heading as='h2' my='10' textAlign='center'>
             Personal Project
           </Heading>
@@ -199,7 +230,7 @@ const Index = () => {
                 key={i.title}
               >
                 <Box overflow='hidden' maxHeight='md'>
-                  <ChakraImage src={i.img} title={i.title} />
+                  <ChakraImage src={i.img} title={i.title} loading='lazy' sizes='100%' />
                 </Box>
                 <Box p='6'>
                   <Heading as='h3' size='md'>
@@ -230,32 +261,39 @@ const Index = () => {
                       })}
                     </Stack>
                   </Text>
-                  <Box mt='5'>
-                    <Button colorScheme='#f00000' size='md'>
-                      {' '}
-                      Visit{' '}
-                    </Button>
-                    <Button
-                      background='#000000'
-                      colorScheme='whiteAlpha'
-                      leftIcon={
-                        <Icon
-                          fill='currentColor'
-                          viewBox='0 0 24 24'
-                          fontSize='20'
-                          stroke='currentColor'
+                  <Box mt='5' display='flex' gap='5'>
+                    {i.address ? (
+                      <Link href={i.address}>
+                        <a target='_blank'>
+                          <Button size='md'> Visit </Button>
+                        </a>
+                      </Link>
+                    ) : (
+                      <Button size='md'> Coming Soon </Button>
+                    )}
+                    <Link href={i.repo}>
+                      <a target='_blank' rel='noopener noreferrer'>
+                        <Button
+                          leftIcon={
+                            <Icon
+                              fill='currentColor'
+                              viewBox='0 0 24 24'
+                              fontSize='20'
+                              stroke='currentColor'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                stroke='none'
+                                d={siGithub.path}
+                              />
+                            </Icon>
+                          }
                         >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            stroke='none'
-                            d={siGithub.path}
-                          />
-                        </Icon>
-                      }
-                    >
-                      Repositories
-                    </Button>
+                          Repositories
+                        </Button>
+                      </a>
+                    </Link>
                   </Box>
                 </Box>
               </Box>
@@ -263,6 +301,7 @@ const Index = () => {
           </Stack>
         </Stack>
         <Stack>
+          <div id='repositories'></div>
           <Heading as='h2' my='10' textAlign='center'>
             Repositories
           </Heading>
@@ -279,14 +318,23 @@ const Index = () => {
                 </Heading>
                 <Stack direction='row' my='3'>
                   {i.topics.map((is: string) => (
-                    <Badge colorScheme='purple'>{is}</Badge>
+                    <Badge colorScheme='purple' key={is}>
+                      {is}
+                    </Badge>
                   ))}
                 </Stack>
                 <Text as='p'>{i.description}</Text>
-                <Box mt='5'>
+                <Box mt='5' display='flex' gap={5}>
+                  {i.homepage ? (
+                    <Link href={i.homepage}>
+                      <a target='_blank' rel='noopener noreferrer'>
+                        <Button>Homepage</Button>
+                      </a>
+                    </Link>
+                  ) : (
+                    ''
+                  )}
                   <Button
-                    background='#000000'
-                    colorScheme='whiteAlpha'
                     leftIcon={
                       <Icon
                         fill='currentColor'
@@ -314,14 +362,53 @@ const Index = () => {
           <Heading as='h2' my='10' textAlign='center'>
             Certifications
           </Heading>
+          {data.skill.map((i: any) => (
+            <Box
+              borderRadius='lg'
+              borderWidth='1px'
+              overflow='hidden'
+              key={i.id}
+            >
+              <Box p='6'>
+                <Heading as='h3' size='md'>
+                  {i.title}
+                </Heading>
+                <Stack direction='row' my='3' alignItems='center'>
+                  {iconProvider
+                    .filter((it) => i.company === it.name)
+                    .map((it) => (
+                      <Icon fill={it.color} viewBox='0 0 24 24' fontSize='20'>
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          stroke='none'
+                          d={it.path}
+                        />
+                      </Icon>
+                    ))}{' '}
+                  <Text fontSize='lg'>{i.company}</Text>
+                </Stack>
+                <Text as='p'>Published at {i.date}</Text>
+                <Box mt='5' display='flex' gap={5}>
+                  <Link href={i.credential}>
+                    <a target='_blank' rel='noreferrer noopener'>
+                      <Button>See Credential</Button>
+                    </a>
+                  </Link>
+                </Box>
+              </Box>
+            </Box>
+          ))}
         </Stack>
       </Main>
-
       <DarkModeSwitch />
       <Footer>
-        <Text>Build with ❤️</Text>
-        <Text>Powered by Vercel</Text>
-        <Text>Nur Kholiq Ansori</Text>
+        <div id='footer'></div>
+        <Center flexDirection='column'>
+          <Text>Build with ❤️</Text>
+          <Text>Powered by Vercel</Text>
+          <Text>Nur Kholiq Ansori</Text>
+        </Center>
       </Footer>
     </Container>
   )
