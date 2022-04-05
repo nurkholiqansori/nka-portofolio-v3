@@ -129,8 +129,16 @@ const iconProvider = [
 
 const Index = () => {
   const [dataRepo, setDataRepo] = React.useState<
-    [{ name: string; description: string; topics: [string]; homepage: string }]
-  >([{ name: '', description: '', topics: [''], homepage: '' }])
+    [
+      {
+        name: string
+        description: string
+        topics: [string]
+        homepage: string
+        html_url: string
+      },
+    ]
+  >([{ name: '', description: '', topics: [''], homepage: '', html_url: '' }])
   const [dataProfile, setDataProfile] = React.useState<{
     [key: string]: string
     avatar_url: string
@@ -182,7 +190,7 @@ const Index = () => {
               key={i.com}
             >
               <Box overflow='hidden'>
-                <ChakraImage src={i.img} title={i.title + ' at ' + i.com} />
+                <ChakraImage src={i.img} title={i.title + ' at ' + i.com}  />
               </Box>
               <Box p='6'>
                 <Heading as='h3' size='md'>
@@ -230,7 +238,12 @@ const Index = () => {
                 key={i.title}
               >
                 <Box overflow='hidden' maxHeight='md'>
-                  <ChakraImage src={i.img} title={i.title} loading='lazy' sizes='100%' />
+                  <ChakraImage
+                    src={i.img}
+                    title={i.title}
+                    loading='lazy'
+                    sizes='100%'
+                  />
                 </Box>
                 <Box p='6'>
                   <Heading as='h3' size='md'>
@@ -334,25 +347,29 @@ const Index = () => {
                   ) : (
                     ''
                   )}
-                  <Button
-                    leftIcon={
-                      <Icon
-                        fill='currentColor'
-                        viewBox='0 0 24 24'
-                        fontSize='20'
-                        stroke='currentColor'
+                  <Link href={i.html_url}>
+                    <a target='_blank' rel='noopener noreferrer'>
+                      <Button
+                        leftIcon={
+                          <Icon
+                            fill='currentColor'
+                            viewBox='0 0 24 24'
+                            fontSize='20'
+                            stroke='currentColor'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              stroke='none'
+                              d={siGithub.path}
+                            />
+                          </Icon>
+                        }
                       >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          stroke='none'
-                          d={siGithub.path}
-                        />
-                      </Icon>
-                    }
-                  >
-                    Repositories
-                  </Button>
+                        Repositories
+                      </Button>
+                    </a>
+                  </Link>
                 </Box>
               </Box>
             </Box>

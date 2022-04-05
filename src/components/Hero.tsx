@@ -101,7 +101,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             </Icon>
             {data.birthPlace}
           </Flex>
-          <Flex alignItems='center' gap='5'>
+          <Flex alignItems='center' gap='5' mb='7'>
             <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
               <path
                 strokeLinecap='round'
@@ -118,11 +118,8 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             </Icon>
             {location}
           </Flex>
-          <Text>
-            Id culpa enim irure deserunt occaecat qui ea in. Fugiat do est elit
-            duis officia nisi dolor aliqua. Qui laborum dolor excepteur ex
-            laboris aute adipisicing sit ut amet officia. In eu magna mollit
-            laborum aliqua ut labore aute excepteur.{' '}
+          <Text align='justify'>
+            {data.description}
           </Text>
         </Box>
         <Stack justifyContent='center' flexWrap='wrap' direction='row' gap='5' align='center' my='10'>
