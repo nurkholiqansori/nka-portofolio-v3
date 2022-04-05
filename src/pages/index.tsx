@@ -329,7 +329,7 @@ const Index = () => {
                 <Heading as='h3' size='md'>
                   {i.name}
                 </Heading>
-                <Stack direction='row' my='3'>
+                <Stack direction='row' my='3' flexWrap='wrap' >
                   {i.topics.map((is: string) => (
                     <Badge colorScheme='purple' key={is}>
                       {is}
