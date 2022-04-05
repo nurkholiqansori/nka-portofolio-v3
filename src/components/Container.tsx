@@ -1,4 +1,4 @@
-import { Flex, useColorMode, FlexProps } from '@chakra-ui/react'
+import { Box, useColorMode, FlexProps } from '@chakra-ui/react'
 import { NextSeo, SocialProfileJsonLd } from 'next-seo'
 
 export const Container = (props: FlexProps) => {
@@ -73,7 +73,7 @@ export const Container = (props: FlexProps) => {
           'http://www.linkedin.com/in/nurkholiqansori',
         ]}
       />
-      <Flex
+      <Box
         direction='column'
         alignItems='center'
         justifyContent='flex-start'
