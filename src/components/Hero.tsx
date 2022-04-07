@@ -11,6 +11,7 @@ import {
   Center,
   Button,
   useColorMode,
+  Skeleton
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
@@ -52,7 +53,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
     if (children && children[0].props && children[0].props.src) {
       return <Flex gap='2' flexWrap='wrap' justifyContent='center' {...props} />
     }
-    return <Text as='p' align='justify' {...props} />
+    return <Text as='span' align='justify' {...props} />
   }
 
   return (
@@ -73,22 +74,28 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             {avatarUrl ? (
               <Avatar size='2xl' name={name} src={avatarUrl} />
             ) : (
-              <SkeletonCircle size='30' />
+              <SkeletonCircle size='100' />
             )}
           </Flex>
           <Stack fontSize='md' my='10'>
-            <ReactMarkdown
-              remarkPlugins={[remarkHtml]}
-              rehypePlugins={[rehypeSanitize]}
-              components={{
-                h1: H1,
-                h2: H2,
-                a: Linked,
-                p: Paragraph,
-              }}
-            >
-              {readme}
-            </ReactMarkdown>
+            {apiReadme.content ? (
+              <ReactMarkdown
+                remarkPlugins={[remarkHtml]}
+                rehypePlugins={[rehypeSanitize]}
+                components={{
+                  h1: H1,
+                  h2: H2,
+                  a: Linked,
+                  p: Paragraph,
+                }}
+              >
+                {readme}
+              </ReactMarkdown>
+            ) : (
+              <>
+                <Skeleton width='80' height='200px' />
+              </>
+            )}
           </Stack>
         </Center>
         <Box mx='auto'>
@@ -104,21 +111,27 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
             {data.birthPlace}
           </Flex>
           <Flex alignItems='center' gap='5' mb='7'>
-            <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
-              />
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
-              />
-            </Icon>
-            {location}
+            {apiReadme.content ? (
+              <>
+                <Icon fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                  />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                  />
+                </Icon>
+                {location}
+              </>
+            ) : (
+              <Skeleton mt='10px' width='36' height='8' />
+            )}
           </Flex>
           <Text align='justify'>{data.description}</Text>
         </Box>
@@ -132,7 +145,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
         >
           {data.socMed.map((i) => (
             <ChakraLink
-              key={i.name}
+              key={i.id}
               href={i.link}
               isExternal
               mr={2}

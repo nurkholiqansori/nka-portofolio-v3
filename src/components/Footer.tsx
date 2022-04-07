@@ -1,5 +1,6 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 
 export const Footer = (props: FlexProps) => (
-  <Flex direction='column' as="footer" py="8rem" {...props} />
+  <Flex width='100vw' height='100vh' direction='column' as="footer" justifyContent='center' alignItems='center' {...props} />
 )
+  
