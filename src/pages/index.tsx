@@ -170,14 +170,81 @@ const Index = () => {
       .then((result) => setDataReadme(result))
       .catch((error) => console.log('error', error))
   }, [])
+  const aboutRef = React.useRef<HTMLDivElement>(null)
+  const portofolioRef = React.useRef<HTMLDivElement>(null)
+  const personalProjectsRef = React.useRef<HTMLDivElement>(null)
+  const repositoriesRef = React.useRef<HTMLDivElement>(null)
+  const cerfiticateRef = React.useRef<HTMLDivElement>(null)
+  const footerRef = React.useRef<HTMLDivElement>(null)
+  const headerRef = React.useRef<HTMLDivElement>(null)
 
   console.log(dataRepo, dataProfile, dataReadme)
 
   return (
     <Container>
+      <div id='header' ref={headerRef}></div>
+      <Box
+        as='nav'
+        w='100vw'
+        h='100vh'
+        display='grid'
+        py='20'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+      >
+        <Button
+          onClick={() =>
+            aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          About
+        </Button>
+        <Button
+          onClick={() =>
+            portofolioRef.current?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          Portofolio
+        </Button>
+        <Button
+          onClick={() =>
+            personalProjectsRef.current?.scrollIntoView({
+              behavior: 'smooth',
+            })
+          }
+        >
+          Personal Projects
+        </Button>
+        <Button
+          onClick={() =>
+            repositoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          Repositories
+        </Button>
+        <Button
+          onClick={() =>
+            cerfiticateRef.current?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          Certificate
+        </Button>
+        <Button
+          onClick={() =>
+            footerRef.current?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'end',
+            })
+          }
+        >
+          Footer
+        </Button>
+      </Box>
+      <div id='about' ref={aboutRef}></div>
       <Hero apiProfile={dataProfile} apiReadme={dataReadme} />
       <Main>
-        <div id='portofolio'></div>
+        <div id='portofolio' ref={portofolioRef}></div>
         <Heading as='h2' mb='10' textAlign='center'>
           Portofolio
         </Heading>
@@ -190,7 +257,7 @@ const Index = () => {
               key={i.com}
             >
               <Box overflow='hidden'>
-                <ChakraImage src={i.img} title={i.title + ' at ' + i.com}  />
+                <ChakraImage src={i.img} title={i.title + ' at ' + i.com} />
               </Box>
               <Box p='6'>
                 <Heading as='h3' size='md'>
@@ -225,7 +292,7 @@ const Index = () => {
           ))}
         </Stack>
         <Stack>
-          <div id='personal-project'></div>
+          <div id='personal-project' ref={personalProjectsRef}></div>
           <Heading as='h2' my='10' textAlign='center'>
             Personal Project
           </Heading>
@@ -313,7 +380,7 @@ const Index = () => {
           </Stack>
         </Stack>
         <Stack>
-          <div id='repositories'></div>
+          <div id='repositories' ref={repositoriesRef}></div>
           <Heading as='h2' my='10' textAlign='center'>
             Repositories
           </Heading>
@@ -375,8 +442,14 @@ const Index = () => {
           ))}
         </Stack>
         <Stack>
-          <Heading as='h2' my='10' textAlign='center'>
-            Certifications
+          <div id='certificate' ref={cerfiticateRef}></div>
+          <Heading
+            as='h2'
+            my='10'
+            textAlign='center'
+            onScroll={() => console.log('halo')}
+          >
+            Certificate
           </Heading>
           {data.skill.map((i: any) => (
             <Box
@@ -419,13 +492,23 @@ const Index = () => {
       </Main>
       <DarkModeSwitch />
       <Footer>
-        <div id='footer'></div>
         <Center flexDirection='column'>
           <Text>Build with ❤️</Text>
           <Text>Powered by Vercel</Text>
           <Text>Nur Kholiq Ansori</Text>
+          <Button
+            onClick={() =>
+              headerRef.current?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'end',
+              })
+            }
+          >
+            Go to Top
+          </Button>
         </Center>
       </Footer>
+      <div id='footer' ref={footerRef}></div>
     </Container>
   )
 }
