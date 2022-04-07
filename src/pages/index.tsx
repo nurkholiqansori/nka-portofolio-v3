@@ -257,7 +257,7 @@ const Index = () => {
               key={i.com}
             >
               <Box overflow='hidden'>
-                <ChakraImage src={i.img} title={i.title + ' at ' + i.com} />
+                <ChakraImage src={i.img} title={i.title + ' at ' + i.com} width='fit-content' />
               </Box>
               <Box p='6'>
                 <Heading as='h3' size='md'>
