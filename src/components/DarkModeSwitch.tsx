@@ -11,7 +11,7 @@ export const DarkModeSwitch = () => {
         position='fixed'
         top='1rem'
         right='1rem'
-        aria-hidden='true'
+        aria-label='Toggle dark mode'
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
         leftIcon={
@@ -24,7 +24,7 @@ export const DarkModeSwitch = () => {
         }
       >
         <Collapse in={show}>
-        <FormLabel htmlFor='dark-mode' pt='1.5' cursor='pointer'>
+        <FormLabel aria-hidden='true' htmlFor='dark-mode' pt='1.5' cursor='pointer'>
           Dark Mode
         </FormLabel>
         </Collapse>
