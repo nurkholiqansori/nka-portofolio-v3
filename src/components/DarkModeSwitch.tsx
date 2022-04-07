@@ -11,6 +11,7 @@ export const DarkModeSwitch = () => {
         position='fixed'
         top='1rem'
         right='1rem'
+        aria-hidden={show ? 'false' : 'true'}
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
         leftIcon={
