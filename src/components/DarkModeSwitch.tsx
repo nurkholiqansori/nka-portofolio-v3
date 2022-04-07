@@ -1,19 +1,24 @@
-import { useColorMode, Switch } from '@chakra-ui/react'
+import { useColorMode, Switch, FormControl, FormLabel } from '@chakra-ui/react'
 
 export const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const isDark = colorMode === 'dark'
   return (
     <>
-      <Switch
-        position='fixed'
-        top='1rem'
-        right='1rem'
-        color='green'
-        isChecked={isDark}
-        onChange={toggleColorMode}
-      />
-      <label hidden>Dark Mode</label>
+      <FormControl>
+        <Switch
+          id='dark-mode'
+          position='fixed'
+          top='1rem'
+          right='1rem'
+          color='green'
+          isChecked={isDark}
+          onChange={toggleColorMode}
+        />
+        <FormLabel htmlFor='dark-mode' hidden>
+          Dark Mode
+        </FormLabel>
+      </FormControl>
     </>
   )
 }
