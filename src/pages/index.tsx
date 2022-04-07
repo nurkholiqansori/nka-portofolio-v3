@@ -19,6 +19,7 @@ import React from 'react'
 import { data } from '../api/data'
 import { siGithub } from 'simple-icons/icons'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const iconBuild = [
   {
@@ -256,8 +257,19 @@ const Index = () => {
               overflow='hidden'
               key={i.com}
             >
-              <Box overflow='hidden'>
-                <ChakraImage src={i.img} title={i.title + ' at ' + i.com} width='fit-content' />
+              <Box
+                overflow='hidden'
+                position='relative'
+                width='250'
+                height='400'
+              >
+                <Image
+                  src={i.img}
+                  title={i.title + ' at ' + i.com}
+                  layout='fill'
+                  objectFit='contain'
+                  objectPosition='top'
+                />
               </Box>
               <Box p='6'>
                 <Heading as='h3' size='md'>
@@ -304,12 +316,18 @@ const Index = () => {
                 overflow='hidden'
                 key={i.title}
               >
-                <Box overflow='hidden' maxHeight='md'>
-                  <ChakraImage
+                <Box
+                  overflow='hidden'
+                  position='relative'
+                  width='250'
+                  height='300'
+                >
+                  <Image
                     src={i.img}
                     title={i.title}
-                    loading='lazy'
-                    sizes='100%'
+                    layout='fill'
+                    objectFit='contain'
+                    objectPosition='top'
                   />
                 </Box>
                 <Box p='6'>
