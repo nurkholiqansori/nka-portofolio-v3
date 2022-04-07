@@ -526,9 +526,10 @@ const Index = () => {
       <DarkModeSwitch />
       <Footer>
         <Center flexDirection='column'>
-          <Text>Build with ❤️</Text>
-          <Text>Powered by Vercel</Text>
-          <Text>Nur Kholiq Ansori</Text>
+          <Text>Build with ❤️ by Nur Kholiq Ansori</Text>
+          <Box my='5'>
+            <Image src='/1618983297-powered-by-vercel.svg' width='120' height='25' />
+          </Box>
           <Button
             onClick={() =>
               headerRef.current?.scrollIntoView({
