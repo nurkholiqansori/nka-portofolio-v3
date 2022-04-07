@@ -7,6 +7,7 @@ import {
   Icon,
   Badge,
   Center,
+  useColorMode,
 } from '@chakra-ui/react'
 import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
@@ -177,6 +178,10 @@ const Index = () => {
   const footerRef = React.useRef<HTMLDivElement>(null)
   const headerRef = React.useRef<HTMLDivElement>(null)
 
+    const { colorMode } = useColorMode()
+    const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
+
+
   console.log(dataRepo, dataProfile, dataReadme)
 
   return (
@@ -193,6 +198,8 @@ const Index = () => {
         alignItems='center'
       >
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
@@ -200,6 +207,8 @@ const Index = () => {
           About
         </Button>
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             portofolioRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
@@ -207,6 +216,8 @@ const Index = () => {
           Portofolio
         </Button>
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             personalProjectsRef.current?.scrollIntoView({
               behavior: 'smooth',
@@ -216,6 +227,8 @@ const Index = () => {
           Personal Projects
         </Button>
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             repositoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
@@ -223,6 +236,8 @@ const Index = () => {
           Repositories
         </Button>
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             cerfiticateRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
@@ -230,6 +245,8 @@ const Index = () => {
           Certificate
         </Button>
         <Button
+          colorScheme={bgColor[colorMode]}
+          color='white'
           onClick={() =>
             footerRef.current?.scrollIntoView({
               behavior: 'smooth',
