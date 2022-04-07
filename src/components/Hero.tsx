@@ -48,6 +48,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   const Paragraph = ({ node, ...props }: any) => {
     const { children } = props
     if (children && children[0].props && children[0].props.src) {
+      console.log(children)
       return <Flex gap='2' flexWrap='wrap' justifyContent='center' {...props} />
     }
     return <Text as='p' align='justify' {...props} />
