@@ -4,7 +4,7 @@ export const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const isDark = colorMode === 'dark'
   return (
-    <label>
+    <>
       <Switch
         position='fixed'
         top='1rem'
@@ -13,6 +13,7 @@ export const DarkModeSwitch = () => {
         isChecked={isDark}
         onChange={toggleColorMode}
       />
-    </label>
+      <label hidden>Dark Mode</label>
+    </>
   )
 }
