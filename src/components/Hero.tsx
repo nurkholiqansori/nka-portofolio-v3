@@ -51,15 +51,22 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   const Paragraph = ({ node, ...props }: any) => {
     const { children } = props
     if (children && children[0].props && children[0].props.src) {
-      return <Flex gap='2' flexWrap='wrap' justifyContent='center' {...props} />
+      return (
+        <Flex
+          gap='2'
+          flexWrap='wrap'
+          justifyContent='center'
+          {...props}
+        />
+      )
     }
-    return <Text as='span' align='justify' {...props} />
+    return <Text as='span' align='justify' my={10} {...props} />
   }
 
   return (
     <Box px='1rem' mx='auto' maxWidth='container.sm'>
       <Flex
-        bgGradient='linear(to-l, #7928CA, #FF0080)'
+        bgGradient='linear(to-r, rgb(14, 165, 233), rgb(236, 72, 153))'
         bgClip='text'
         mb='10'
         mt='20'
@@ -77,7 +84,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
               <SkeletonCircle size='100' />
             )}
           </Flex>
-          <Stack fontSize='md' my='10'>
+          <Stack fontSize='md' mt='10' mb={4} gap={3}>
             {apiReadme.content ? (
               <ReactMarkdown
                 remarkPlugins={[remarkHtml]}
@@ -133,7 +140,6 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
               <Skeleton mt='10px' width='36' height='8' />
             )}
           </Flex>
-          <Text align='justify'>{data.description}</Text>
         </Box>
         <Stack
           justifyContent='center'
