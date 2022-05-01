@@ -256,18 +256,6 @@ const Index = () => {
               colorScheme={bgColor[colorMode]}
               bg={'blue.400'}
               _hover={{ bg: 'blue.500' }}
-            >
-              Get started
-            </Button>
-            <Button
-              rounded={'full'}
-              size={'lg'}
-              fontWeight={'medium'}
-              px={6}
-              color={'white'}
-              colorScheme={bgColor[colorMode]}
-              bg={'blue.400'}
-              _hover={{ bg: 'blue.500' }}
               onClick={() =>
                 portofolioRef.current?.scrollIntoView({ behavior: 'smooth' })
               }
@@ -289,7 +277,7 @@ const Index = () => {
                 })
               }
             >
-              Personal Projects
+              Personal Project
             </Button>
             <Button
               rounded={'full'}

@@ -45,6 +45,14 @@ export const Container = (props: FlexProps) => {
             name: 'google-site-verification',
             content: 'LDQrI76atKuVJOouskURaOJiGk6tBm6aNAzLaFn05iI',
           },
+          {
+            name: 'keywords',
+            content: 'Nur Kholiq Ansori, personal web page, personal website',
+          },
+          {
+            name: 'author',
+            content: 'Nur Kholiq Ansori',
+          },
         ]}
         additionalLinkTags={[
           {

@@ -228,7 +228,7 @@ export const data = {
     },
     {
       id: 1,
-      title: 'MERN (Mongo Express.js React.js Node.js) Course',
+      title: 'MERN (Mongo Express.js React.js Node.js) Lecturer',
       address: 'https://mern-lecturer.vercel.app/',
       img: '/doc/project/mern.png',
       date: 'Mar. 2022',
