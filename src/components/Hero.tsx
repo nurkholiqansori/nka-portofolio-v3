@@ -65,14 +65,16 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
 
   return (
     <Box px='1rem' mx='auto' maxWidth='container.sm'>
-      <Flex
-        bgGradient='linear(to-r, rgb(14, 165, 233), rgb(236, 72, 153))'
-        bgClip='text'
-        mb='10'
-        mt='20'
-      >
-        <Heading fontSize='6vw' textAlign='center'>
-          Welcome to my personal website
+      <Flex mb='10' mt='20' textAlign={'center'} align={'center'}>
+        <Heading
+          fontWeight={900}
+          fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
+          lineHeight={'110%'}
+        >
+          Welcome to{' '}
+          <Text as={'span'} color={'blue.400'}>
+            my personal website
+          </Text>
         </Heading>
       </Flex>
       <Box my='20' px='1rem'>
@@ -163,8 +165,14 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
               justifyContent='center'
             >
               <Button
+                rounded={'full'}
+                size={'lg'}
+                fontWeight={'medium'}
+                px={6}
+                color={'white'}
                 colorScheme={bgColor[colorMode]}
-                color='white'
+                bg={'blue.400'}
+                _hover={{ bg: 'blue.500' }}
                 leftIcon={
                   <Icon
                     fill='#ffffff'
