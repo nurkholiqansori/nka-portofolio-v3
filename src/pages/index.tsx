@@ -22,6 +22,9 @@ import { data } from '../api/data'
 import { siGithub } from 'simple-icons/icons'
 import Link from 'next/link'
 import gsap from 'gsap'
+import { useIntersectionObserver } from 'usehooks-ts'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import Navigation from '../components/Navigation'
 
 const iconBuild = [
   {
@@ -168,7 +171,7 @@ const Index = () => {
   }>({
     content: '',
   })
-  const [loading, setLoading] = React.useState(true)
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   React.useEffect(() => {
     fetch('https://api.github.com/users/nurkholiqansori/repos')
@@ -202,6 +205,18 @@ const Index = () => {
   const loadingRef = React.useRef<HTMLDivElement>(null)
   const titleLoadingRef = React.useRef<HTMLDivElement>(null)
   const closingLoadingRef = React.useRef<HTMLDivElement>(null)
+
+  // ACTIVE STATE
+  const [navActive, setNavActive] = React.useState<boolean>(false)
+  const [aboutActive, setAboutActive] = React.useState<boolean>(false)
+  const [portofolioActive, setPortofolioActive] = React.useState<boolean>(false)
+  const [personalProjectsActive, setPersonalProjectsActive] =
+    React.useState<boolean>(false)
+  const [repositoriesActive, setRepositoriesActive] =
+    React.useState<boolean>(false)
+  const [cerfiticateActive, setCerfiticateActive] =
+    React.useState<boolean>(false)
+  const [footerActive, setFooterActive] = React.useState<boolean>(false)
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
@@ -249,17 +264,40 @@ const Index = () => {
 
   React.useEffect(() => {
     if (window !== undefined && !loading && containerRef !== undefined) {
+      gsap.registerPlugin(ScrollTrigger)
       const tl = gsap.timeline()
       tl.to([containerRef.current], {
         opacity: 1,
       })
         .call(() => aboutRef.current?.scrollIntoView({ behavior: 'smooth' }))
-        .call(() =>
-          headerRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-          }), null, '3'
+        .call(
+          () =>
+            headerRef.current?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'end',
+            }),
+          null,
+          '3',
         )
+
+      // ABOUT
+
+      // PORTOFOLIO
+
+      // PERSONAL PROJECTS
+
+      // REPOSITORIES
+
+      // CERFITICATE
+      ScrollTrigger.create({
+        trigger: cerfiticateRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setCerfiticateActive(true),
+        onLeave: () => setCerfiticateActive(false),
+        onEnterBack: () => setCerfiticateActive(true),
+        onLeaveBack: () => setCerfiticateActive(false),
+      })
     }
   }, [loading])
 
@@ -361,7 +399,7 @@ const Index = () => {
               bg={'blue.400'}
               _hover={{ bg: 'blue.500' }}
               onClick={() =>
-                aboutRef.current?.scrollIntoView({ behavior: 'smooth' })
+                bodyRef.current?.scrollIntoView({ behavior: 'smooth' })
               }
             >
               About
@@ -448,106 +486,15 @@ const Index = () => {
             </Button>
           </Box>
           <div ref={bodyRef}>
-            <div id='about' ref={aboutRef}></div>
             <Hero apiProfile={dataProfile} apiReadme={dataReadme} />
             <Main>
-              <div id='portofolio' ref={portofolioRef}></div>
-              <Heading as='h2' mb='10' textAlign='center'>
-                Portofolio
-              </Heading>
-              <Stack gap={2}>
-                {data.experience.map((i) => (
-                  <Center py={5} key={i.com}>
-                    <Box
-                      w={'full'}
-                      bg={useColorModeValue('white', 'gray.900')}
-                      boxShadow={'2xl'}
-                      rounded={'md'}
-                      p={6}
-                      overflow={'hidden'}
-                    >
-                      <Box
-                        h={'210px'}
-                        bg={'gray.100'}
-                        mt={-6}
-                        mx={-6}
-                        mb={6}
-                        pos={'relative'}
-                        overflow={'hidden'}
-                        roundedTop={'md'}
-                      >
-                        <Image src={i.img} alt={i.title + ' at ' + i.com} />
-                      </Box>
-                      <Stack>
-                        <Text
-                          color={'blue.500'}
-                          textTransform={'uppercase'}
-                          fontWeight={800}
-                          fontSize={'sm'}
-                          letterSpacing={1.1}
-                        >
-                          {i.status}
-                        </Text>
-                        <Heading
-                          color={useColorModeValue('gray.700', 'white')}
-                          fontSize={'2xl'}
-                          fontFamily={'body'}
-                        >
-                          {i.com}
-                        </Heading>
-                        <Text as='p'>Develop at {i.date}</Text>
-                        <Text as='p'>
-                          Build with{' '}
-                          <Icon
-                            fill={iconBuild[0][i.build]?.color}
-                            viewBox='0 0 24 24'
-                            fontSize='20'
-                            stroke='currentColor'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              stroke='none'
-                              d={iconBuild[0][i.build].path}
-                            />
-                          </Icon>
-                        </Text>
-                      </Stack>
-                      <Stack
-                        mt={6}
-                        direction={'row'}
-                        spacing={4}
-                        align={'center'}
-                      >
-                        <Link href={i.address}>
-                          <a target='_blank' rel='noreferrer nofollow'>
-                            <Button
-                              rounded={'full'}
-                              size='md'
-                              fontWeight={'medium'}
-                              px={6}
-                              color={'white'}
-                              colorScheme={bgColor[colorMode]}
-                              bg={'blue.400'}
-                              _hover={{ bg: 'blue.500' }}
-                            >
-                              Visit
-                            </Button>
-                          </a>
-                        </Link>
-                      </Stack>
-                    </Box>
-                  </Center>
-                ))}
-              </Stack>
-              <Stack gap={5}>
-                <div id='personal-project' ref={personalProjectsRef}></div>
-                <Heading as='h2' my='10' textAlign='center'>
-                  Personal Project
+              <div id='portofolio' ref={portofolioRef}>
+                <Heading as='h2' mb='10' textAlign='center'>
+                  Portofolio
                 </Heading>
                 <Stack gap={2}>
-                  {data.personalProjects.map((i) => (
-                    <Center py={5} key={i.title}>
+                  {data.experience.map((i) => (
+                    <Center py={5} key={i.com}>
                       <Box
                         w={'full'}
                         bg={useColorModeValue('white', 'gray.900')}
@@ -566,7 +513,7 @@ const Index = () => {
                           overflow={'hidden'}
                           roundedTop={'md'}
                         >
-                          <Image src={i.img} alt={i.title} />
+                          <Image src={i.img} alt={i.title + ' at ' + i.com} />
                         </Box>
                         <Stack>
                           <Text
@@ -576,80 +523,41 @@ const Index = () => {
                             fontSize={'sm'}
                             letterSpacing={1.1}
                           >
-                            {/* {i.status} */}
+                            {i.status}
                           </Text>
                           <Heading
                             color={useColorModeValue('gray.700', 'white')}
                             fontSize={'2xl'}
                             fontFamily={'body'}
                           >
-                            {i.title}
+                            {i.com}
                           </Heading>
-                          <Text as='p'>Develop on {i.date}</Text>
-                          <Text as='div'>
-                            Build with:{' '}
-                            <Stack direction='row' mt='5'>
-                              {i.build.map((is, index) => {
-                                return (
-                                  <Icon
-                                    fill={iconBuild[0][is.name]?.color}
-                                    viewBox='0 0 24 24'
-                                    fontSize='20'
-                                    stroke='currentColor'
-                                    key={index}
-                                  >
-                                    <path
-                                      strokeLinecap='round'
-                                      strokeLinejoin='round'
-                                      stroke='none'
-                                      d={iconBuild[0][is.name]?.path}
-                                    />
-                                  </Icon>
-                                )
-                              })}
-                            </Stack>
+                          <Text as='p'>Develop at {i.date}</Text>
+                          <Text as='p'>
+                            Build with{' '}
+                            <Icon
+                              fill={iconBuild[0][i.build]?.color}
+                              viewBox='0 0 24 24'
+                              fontSize='20'
+                              stroke='currentColor'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                stroke='none'
+                                d={iconBuild[0][i.build].path}
+                              />
+                            </Icon>
                           </Text>
                         </Stack>
                         <Stack
                           mt={6}
                           direction={'row'}
-                          gap={4}
-                          flexWrap={'wrap'}
+                          spacing={4}
                           align={'center'}
                         >
-                          {i.address ? (
-                            <Link href={i.address}>
-                              <a target='_blank'>
-                                <Button
-                                  rounded={'full'}
-                                  size='md'
-                                  fontWeight={'medium'}
-                                  px={6}
-                                  color={'white'}
-                                  colorScheme={bgColor[colorMode]}
-                                  bg={'blue.400'}
-                                  _hover={{ bg: 'blue.500' }}
-                                >
-                                  Visit
-                                </Button>
-                              </a>
-                            </Link>
-                          ) : (
-                            <Button
-                              rounded={'full'}
-                              size='md'
-                              fontWeight={'medium'}
-                              px={6}
-                              color={'white'}
-                              colorScheme={bgColor[colorMode]}
-                              bg={'blue.400'}
-                              _hover={{ bg: 'blue.500' }}
-                            >
-                              Coming Soon
-                            </Button>
-                          )}
-                          <Link href={i.repo}>
-                            <a target='_blank' rel='noopener noreferrer'>
+                          <Link href={i.address}>
+                            <a target='_blank' rel='noreferrer nofollow'>
                               <Button
                                 rounded={'full'}
                                 size='md'
@@ -659,23 +567,8 @@ const Index = () => {
                                 colorScheme={bgColor[colorMode]}
                                 bg={'blue.400'}
                                 _hover={{ bg: 'blue.500' }}
-                                leftIcon={
-                                  <Icon
-                                    fill='currentColor'
-                                    viewBox='0 0 24 24'
-                                    fontSize='20'
-                                    stroke='currentColor'
-                                  >
-                                    <path
-                                      strokeLinecap='round'
-                                      strokeLinejoin='round'
-                                      stroke='none'
-                                      d={siGithub.path}
-                                    />
-                                  </Icon>
-                                }
                               >
-                                Repositories
+                                Visit
                               </Button>
                             </a>
                           </Link>
@@ -684,16 +577,15 @@ const Index = () => {
                     </Center>
                   ))}
                 </Stack>
-              </Stack>
+              </div>
               <Stack gap={5}>
-                <div id='repositories' ref={repositoriesRef}></div>
-                <Heading as='h2' my='10' textAlign='center'>
-                  Repositories
-                </Heading>
-                <Stack gap={2}>
-                  {dataRepo[0].name ? (
-                    dataRepo.map((i) => (
-                      <Center py={5} key={i.name}>
+                <div id='personal-project' ref={personalProjectsRef}>
+                  <Heading as='h2' my='10' textAlign='center'>
+                    Personal Project
+                  </Heading>
+                  <Stack gap={2}>
+                    {data.personalProjects.map((i) => (
+                      <Center py={5} key={i.title}>
                         <Box
                           w={'full'}
                           bg={useColorModeValue('white', 'gray.900')}
@@ -702,6 +594,18 @@ const Index = () => {
                           p={6}
                           overflow={'hidden'}
                         >
+                          <Box
+                            h={'210px'}
+                            bg={'gray.100'}
+                            mt={-6}
+                            mx={-6}
+                            mb={6}
+                            pos={'relative'}
+                            overflow={'hidden'}
+                            roundedTop={'md'}
+                          >
+                            <Image src={i.img} alt={i.title} />
+                          </Box>
                           <Stack>
                             <Text
                               color={'blue.500'}
@@ -710,28 +614,39 @@ const Index = () => {
                               fontSize={'sm'}
                               letterSpacing={1.1}
                             >
-                              {i.language}
+                              {/* {i.status} */}
                             </Text>
                             <Heading
                               color={useColorModeValue('gray.700', 'white')}
                               fontSize={'2xl'}
                               fontFamily={'body'}
                             >
-                              {i.name}
+                              {i.title}
                             </Heading>
-                            <Stack
-                              direction='row'
-                              my='3'
-                              flexWrap='wrap'
-                              gap={2}
-                            >
-                              {i.topics.map((is: string) => (
-                                <Badge colorScheme='purple' key={is}>
-                                  {is}
-                                </Badge>
-                              ))}
-                            </Stack>
-                            <Text as='p'>{i.description}</Text>
+                            <Text as='p'>Develop on {i.date}</Text>
+                            <Text as='div'>
+                              Build with:{' '}
+                              <Stack direction='row' mt='5'>
+                                {i.build.map((is, index) => {
+                                  return (
+                                    <Icon
+                                      fill={iconBuild[0][is.name]?.color}
+                                      viewBox='0 0 24 24'
+                                      fontSize='20'
+                                      stroke='currentColor'
+                                      key={index}
+                                    >
+                                      <path
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        stroke='none'
+                                        d={iconBuild[0][is.name]?.path}
+                                      />
+                                    </Icon>
+                                  )
+                                })}
+                              </Stack>
+                            </Text>
                           </Stack>
                           <Stack
                             mt={6}
@@ -740,9 +655,9 @@ const Index = () => {
                             flexWrap={'wrap'}
                             align={'center'}
                           >
-                            {i.homepage && (
-                              <Link href={i.homepage}>
-                                <a target='_blank' rel='noopener noreferrer'>
+                            {i.address ? (
+                              <Link href={i.address}>
+                                <a target='_blank'>
                                   <Button
                                     rounded={'full'}
                                     size='md'
@@ -753,12 +668,25 @@ const Index = () => {
                                     bg={'blue.400'}
                                     _hover={{ bg: 'blue.500' }}
                                   >
-                                    Homepage
+                                    Visit
                                   </Button>
                                 </a>
                               </Link>
+                            ) : (
+                              <Button
+                                rounded={'full'}
+                                size='md'
+                                fontWeight={'medium'}
+                                px={6}
+                                color={'white'}
+                                colorScheme={bgColor[colorMode]}
+                                bg={'blue.400'}
+                                _hover={{ bg: 'blue.500' }}
+                              >
+                                Coming Soon
+                              </Button>
                             )}
-                            <Link href={i.html_url}>
+                            <Link href={i.repo}>
                               <a target='_blank' rel='noopener noreferrer'>
                                 <Button
                                   rounded={'full'}
@@ -792,96 +720,210 @@ const Index = () => {
                           </Stack>
                         </Box>
                       </Center>
-                    ))
-                  ) : (
-                    <>
-                      <Skeleton width='200' height='100' />
-                      <Skeleton width='200' height='100' />
-                      <Skeleton width='200' height='100' />
-                    </>
-                  )}
-                </Stack>
+                    ))}
+                  </Stack>
+                </div>
               </Stack>
               <Stack gap={5}>
-                <div id='certificate' ref={cerfiticateRef}></div>
-                <Heading as='h2' my='24' textAlign='center'>
-                  Certificate
-                </Heading>
-                <Stack gap={2}>
-                  {data.skill
-                    .slice()
-                    .reverse()
-                    .map((i: any) => (
-                      <Center py={5} key={i.id}>
-                        <Box
-                          w={'full'}
-                          bg={useColorModeValue('white', 'gray.900')}
-                          boxShadow={'2xl'}
-                          rounded={'md'}
-                          p={6}
-                          overflow={'hidden'}
-                        >
-                          <Stack>
-                            <Heading
-                              color={useColorModeValue('gray.700', 'white')}
-                              fontSize={'2xl'}
-                              fontFamily={'body'}
-                            >
-                              {i.title}
-                            </Heading>
-                            <Stack direction='row' my='3' alignItems='center'>
-                              {iconProvider
-                                .filter((it) => i.company === it.name)
-                                .map((it) => (
-                                  <Icon
-                                    fill={it.color}
-                                    viewBox='0 0 24 24'
-                                    fontSize='20'
-                                    key={it.name}
-                                  >
-                                    <path
-                                      strokeLinecap='round'
-                                      strokeLinejoin='round'
-                                      stroke='none'
-                                      d={it.path}
-                                    />
-                                  </Icon>
-                                ))}{' '}
-                              <Text fontSize='lg'>{i.company}</Text>
-                            </Stack>
-                            <Text as='p'>Published at {i.date}</Text>
-                          </Stack>
-                          <Stack
-                            mt={6}
-                            direction={'row'}
-                            spacing={4}
-                            align={'center'}
+                <div id='repositories' ref={repositoriesRef}>
+                  <Heading as='h2' my='10' textAlign='center'>
+                    Repositories
+                  </Heading>
+                  <Stack gap={2}>
+                    {dataRepo[0].name ? (
+                      dataRepo.map((i) => (
+                        <Center py={5} key={i.name}>
+                          <Box
+                            w={'full'}
+                            bg={useColorModeValue('white', 'gray.900')}
+                            boxShadow={'2xl'}
+                            rounded={'md'}
+                            p={6}
+                            overflow={'hidden'}
                           >
-                            <Link href={i.credential}>
-                              <a target='_blank' rel='noreferrer noopener'>
-                                <Button
-                                  rounded={'full'}
-                                  size='md'
-                                  fontWeight={'medium'}
-                                  px={6}
-                                  color={'white'}
-                                  colorScheme={bgColor[colorMode]}
-                                  bg={'blue.400'}
-                                  _hover={{ bg: 'blue.500' }}
-                                >
-                                  See Credential
-                                </Button>
-                              </a>
-                            </Link>
-                          </Stack>
-                        </Box>
-                      </Center>
-                    ))}
-                </Stack>
+                            <Stack>
+                              <Text
+                                color={'blue.500'}
+                                textTransform={'uppercase'}
+                                fontWeight={800}
+                                fontSize={'sm'}
+                                letterSpacing={1.1}
+                              >
+                                {i.language}
+                              </Text>
+                              <Heading
+                                color={useColorModeValue('gray.700', 'white')}
+                                fontSize={'2xl'}
+                                fontFamily={'body'}
+                              >
+                                {i.name}
+                              </Heading>
+                              <Stack
+                                direction='row'
+                                my='3'
+                                flexWrap='wrap'
+                                gap={2}
+                              >
+                                {i.topics.map((is: string) => (
+                                  <Badge colorScheme='purple' key={is}>
+                                    {is}
+                                  </Badge>
+                                ))}
+                              </Stack>
+                              <Text as='p'>{i.description}</Text>
+                            </Stack>
+                            <Stack
+                              mt={6}
+                              direction={'row'}
+                              gap={4}
+                              flexWrap={'wrap'}
+                              align={'center'}
+                            >
+                              {i.homepage && (
+                                <Link href={i.homepage}>
+                                  <a target='_blank' rel='noopener noreferrer'>
+                                    <Button
+                                      rounded={'full'}
+                                      size='md'
+                                      fontWeight={'medium'}
+                                      px={6}
+                                      color={'white'}
+                                      colorScheme={bgColor[colorMode]}
+                                      bg={'blue.400'}
+                                      _hover={{ bg: 'blue.500' }}
+                                    >
+                                      Homepage
+                                    </Button>
+                                  </a>
+                                </Link>
+                              )}
+                              <Link href={i.html_url}>
+                                <a target='_blank' rel='noopener noreferrer'>
+                                  <Button
+                                    rounded={'full'}
+                                    size='md'
+                                    fontWeight={'medium'}
+                                    px={6}
+                                    color={'white'}
+                                    colorScheme={bgColor[colorMode]}
+                                    bg={'blue.400'}
+                                    _hover={{ bg: 'blue.500' }}
+                                    leftIcon={
+                                      <Icon
+                                        fill='currentColor'
+                                        viewBox='0 0 24 24'
+                                        fontSize='20'
+                                        stroke='currentColor'
+                                      >
+                                        <path
+                                          strokeLinecap='round'
+                                          strokeLinejoin='round'
+                                          stroke='none'
+                                          d={siGithub.path}
+                                        />
+                                      </Icon>
+                                    }
+                                  >
+                                    Repositories
+                                  </Button>
+                                </a>
+                              </Link>
+                            </Stack>
+                          </Box>
+                        </Center>
+                      ))
+                    ) : (
+                      <>
+                        <Skeleton width='200' height='100' />
+                        <Skeleton width='200' height='100' />
+                        <Skeleton width='200' height='100' />
+                      </>
+                    )}
+                  </Stack>
+                </div>
+              </Stack>
+              <Stack gap={5}>
+                <div id='certificate' ref={cerfiticateRef}>
+                  <Heading as='h2' my='24' textAlign='center'>
+                    Certificate
+                  </Heading>
+                  <Stack gap={2}>
+                    {data.skill
+                      .slice()
+                      .reverse()
+                      .map((i: any) => (
+                        <Center py={5} key={i.id}>
+                          <Box
+                            w={'full'}
+                            bg={useColorModeValue('white', 'gray.900')}
+                            boxShadow={'2xl'}
+                            rounded={'md'}
+                            p={6}
+                            overflow={'hidden'}
+                          >
+                            <Stack>
+                              <Heading
+                                color={useColorModeValue('gray.700', 'white')}
+                                fontSize={'2xl'}
+                                fontFamily={'body'}
+                              >
+                                {i.title}
+                              </Heading>
+                              <Stack direction='row' my='3' alignItems='center'>
+                                {iconProvider
+                                  .filter((it) => i.company === it.name)
+                                  .map((it) => (
+                                    <Icon
+                                      fill={it.color}
+                                      viewBox='0 0 24 24'
+                                      fontSize='20'
+                                      key={it.name}
+                                    >
+                                      <path
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        stroke='none'
+                                        d={it.path}
+                                      />
+                                    </Icon>
+                                  ))}{' '}
+                                <Text fontSize='lg'>{i.company}</Text>
+                              </Stack>
+                              <Text as='p'>Published at {i.date}</Text>
+                            </Stack>
+                            <Stack
+                              mt={6}
+                              direction={'row'}
+                              spacing={4}
+                              align={'center'}
+                            >
+                              <Link href={i.credential}>
+                                <a target='_blank' rel='noreferrer noopener'>
+                                  <Button
+                                    rounded={'full'}
+                                    size='md'
+                                    fontWeight={'medium'}
+                                    px={6}
+                                    color={'white'}
+                                    colorScheme={bgColor[colorMode]}
+                                    bg={'blue.400'}
+                                    _hover={{ bg: 'blue.500' }}
+                                  >
+                                    See Credential
+                                  </Button>
+                                </a>
+                              </Link>
+                            </Stack>
+                          </Box>
+                        </Center>
+                      ))}
+                  </Stack>
+                </div>
               </Stack>
             </Main>
           </div>
           <DarkModeSwitch />
+          <Navigation />
           <div ref={footerWrapperRef}>
             <Footer>
               <Center flexDirection='column'>

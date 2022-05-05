@@ -11,7 +11,7 @@ import {
   Center,
   Button,
   useColorMode,
-  Skeleton
+  Skeleton,
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
@@ -51,20 +51,14 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
   const Paragraph = ({ node, ...props }: any) => {
     const { children } = props
     if (children && children[0].props && children[0].props.src) {
-      return (
-        <Flex
-          gap='2'
-          flexWrap='wrap'
-          justifyContent='center'
-          {...props}
-        />
-      )
+      return <Flex gap='2' flexWrap='wrap' justifyContent='center' {...props} />
     }
     return <Text as='span' align='justify' my={10} {...props} />
   }
 
   return (
     <Box
+      id='about'
       px='1rem'
       mx='auto'
       maxWidth='container.sm'
