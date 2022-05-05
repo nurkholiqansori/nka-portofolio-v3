@@ -614,6 +614,7 @@ const Index = () => {
                           mt={6}
                           direction={'row'}
                           spacing={4}
+                          flexWrap={'wrap'}
                           align={'center'}
                         >
                           {i.address ? (
@@ -736,6 +737,7 @@ const Index = () => {
                             mt={6}
                             direction={'row'}
                             spacing={4}
+                            flexWrap={'wrap'}
                             align={'center'}
                           >
                             {i.homepage && (
