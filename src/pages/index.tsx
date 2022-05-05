@@ -613,7 +613,7 @@ const Index = () => {
                         <Stack
                           mt={6}
                           direction={'row'}
-                          spacing={4}
+                          gap={4}
                           flexWrap={'wrap'}
                           align={'center'}
                         >
@@ -736,7 +736,7 @@ const Index = () => {
                           <Stack
                             mt={6}
                             direction={'row'}
-                            spacing={4}
+                            gap={4}
                             flexWrap={'wrap'}
                             align={'center'}
                           >
