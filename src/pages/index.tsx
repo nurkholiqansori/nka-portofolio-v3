@@ -16,7 +16,7 @@ import {
 import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import DarkModeSwitch from '../components/DarkModeSwitch'
 import { Footer } from '../components/Footer'
 import React from 'react'
 import { data } from '../api/data'
