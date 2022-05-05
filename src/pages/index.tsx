@@ -208,6 +208,8 @@ const Index = () => {
 
   React.useEffect(() => {
     if (window !== undefined) {
+      const width = window.innerWidth < 768 ? '500%' : '200%'
+      
       if (loading) {
         const tl = gsap.timeline({ onComplete: () => setLoading(false) })
         tl.to([titleLoadingRef.current], {
@@ -229,10 +231,14 @@ const Index = () => {
           })
           .to([closingLoadingRef.current], {
             duration: 0.5,
-            width: '200%',
+            width: width,
           })
           .to(
-            [closingLoadingRef.current, loadingRef.current, titleLoadingRef.current],
+            [
+              closingLoadingRef.current,
+              loadingRef.current,
+              titleLoadingRef.current,
+            ],
             {
               display: 'none',
             },
