@@ -22,7 +22,6 @@ import { data } from '../api/data'
 import { siGithub } from 'simple-icons/icons'
 import Link from 'next/link'
 import gsap from 'gsap'
-import { useIntersectionObserver } from 'usehooks-ts'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Navigation from '../components/Navigation'
 
