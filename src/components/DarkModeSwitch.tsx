@@ -115,7 +115,7 @@ const DarkModeSwitch = () => {
             height={`${size * 0.06}px`}
             borderRadius='50%'
             background='white'
-            key='circle-2'
+            key='circle-21'
             variants={childVariants}
           ></MotionBox>
           <MotionBox

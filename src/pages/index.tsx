@@ -10,7 +10,6 @@ import {
   useColorMode,
   Skeleton,
   useColorModeValue,
-  Avatar,
   Image,
 } from '@chakra-ui/react'
 import { Hero } from '../components/Hero'
@@ -23,7 +22,6 @@ import { data } from '../api/data'
 import { siGithub } from 'simple-icons/icons'
 import Link from 'next/link'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 
 const iconBuild = [
   {
@@ -170,6 +168,7 @@ const Index = () => {
   }>({
     content: '',
   })
+  const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     fetch('https://api.github.com/users/nurkholiqansori/repos')
@@ -185,6 +184,8 @@ const Index = () => {
       .then((result) => setDataReadme(result))
       .catch((error) => console.log('error', error))
   }, [])
+
+  // BODY REF
   const aboutRef = React.useRef<HTMLDivElement>(null)
   const portofolioRef = React.useRef<HTMLDivElement>(null)
   const personalProjectsRef = React.useRef<HTMLDivElement>(null)
@@ -197,28 +198,117 @@ const Index = () => {
   const bodyRef = React.useRef<HTMLDivElement>(null)
   const footerWrapperRef = React.useRef<HTMLDivElement>(null)
 
+  // LOADING REF
+  const loadingRef = React.useRef<HTMLDivElement>(null)
+  const titleLoadingRef = React.useRef<HTMLDivElement>(null)
+  const closingLoadingRef = React.useRef<HTMLDivElement>(null)
+
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
 
-  //   gsap.registerPlugin(ScrollTrigger)
-  //   let sections = gsap.utils.toArray([
-  //     navRef.current,
-  //     bodyRef.current,
-  //     footerWrapperRef.current,
-  //   ])
-  //   React.useEffect(() => {
-  //     gsap.to([navRef.current, bodyRef.current, footerWrapperRef.current], {
-  //       xPercent: -100 * (sections.length - 1),
-  //       ScrollTrigger: {
-  //         trigger: containerRef.current,
-  //         pin: true,
-  //       },
-  //     })
-  // }, [])
+  React.useEffect(() => {
+    if (window !== undefined) {
+      if (loading) {
+        const tl = gsap.timeline({ onComplete: () => setLoading(false) })
+        tl.to([titleLoadingRef.current], {
+          delay: 1,
+          duration: 0.5,
+          opacity: 1,
+          stagger: 0.2,
+          ease: 'power3.inOut',
+        })
+          .to([closingLoadingRef.current], {
+            delay: 3,
+            duration: 0.5,
+            translateY: -10,
+          })
+          .to([closingLoadingRef.current], {
+            duration: 0.5,
+            translateY: -10,
+            skewX: '-60deg',
+          })
+          .to([closingLoadingRef.current], {
+            duration: 0.5,
+            width: '200%',
+          })
+          .to(
+            [closingLoadingRef.current, loadingRef.current, titleLoadingRef.current],
+            {
+              display: 'none',
+            },
+          )
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (window !== undefined && !loading && containerRef !== undefined) {
+      const tl = gsap.timeline()
+      tl.to([containerRef.current], {
+        opacity: 1,
+      })
+    }
+  }, [loading])
+
+  if (loading)
+    return (
+      <>
+        <Container>
+          <Stack
+            ref={loadingRef}
+            overflow='hidden'
+            width='full'
+            height='100vh'
+            maxW='100vw'
+            zIndex='banner'
+            position='fixed'
+            top='0'
+            bottom='0'
+            backgroundColor='gray.900'
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+          >
+            <Heading
+              as='div'
+              size='xl'
+              opacity={0}
+              fontWeight='900'
+              color='white'
+              textAlign='center'
+              ref={titleLoadingRef}
+            >
+              Portofolio of{' '}
+              <Heading
+                size='xl'
+                fontWeight='900'
+                textAlign='center'
+                color='blue.500'
+              >
+                Nur Kholiq Ansori
+              </Heading>
+            </Heading>
+            <Stack
+              width='10px'
+              transform='translateX(-50%) translateY(-110%)'
+              height='full'
+              position='absolute'
+              top='0'
+              left='50%'
+              background='#fff'
+              ref={closingLoadingRef}
+            />
+          </Stack>
+        </Container>
+      </>
+    )
 
   return (
     <>
-      <div ref={containerRef}>
+      <div
+        ref={containerRef}
+        style={{ opacity: 0, translate: 'transformY(50px)' }}
+      >
         <Container>
           <div id='header' ref={headerRef}></div>
           <Box
@@ -232,6 +322,22 @@ const Index = () => {
             justifyContent='center'
             alignItems='center'
           >
+            {/* <Button
+              rounded={'none'}
+              sx={{
+                borderImage:
+                  "url('https://img.lovepik.com/free_png/32/37/33/97N58PICpVxKfbdd07Z2N_PIC2018.png_860.png') 27 space",
+              }}
+              size={'lg'}
+              fontWeight={'medium'}
+              px={6}
+              color={'white'}
+              colorScheme={bgColor[colorMode]}
+              bg={'gray.400'}
+              clipPath='polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)'
+            >
+              About
+            </Button> */}
             <Button
               rounded={'full'}
               size={'lg'}
