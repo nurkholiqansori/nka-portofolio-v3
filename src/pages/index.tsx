@@ -209,9 +209,9 @@ const Index = () => {
   React.useEffect(() => {
     if (window !== undefined) {
       const width = window.innerWidth < 768 ? '500%' : '200%'
-      
+      const tl = gsap.timeline({ onComplete: () => setLoading(false) })
+
       if (loading) {
-        const tl = gsap.timeline({ onComplete: () => setLoading(false) })
         tl.to([titleLoadingRef.current], {
           delay: 1,
           duration: 0.5,
@@ -253,6 +253,13 @@ const Index = () => {
       tl.to([containerRef.current], {
         opacity: 1,
       })
+        .call(() => aboutRef.current?.scrollIntoView({ behavior: 'smooth' }))
+        .call(() =>
+          headerRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+          }), null, '3'
+        )
     }
   }, [loading])
 
