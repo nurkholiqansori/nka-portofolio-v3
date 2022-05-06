@@ -223,6 +223,7 @@ const Index: NextPage = () => {
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
 
   React.useEffect(() => {
+    document.body.classList.add('hidden')
     if (window !== undefined) {
       const width = window.innerWidth < 768 ? '500%' : '200%'
       const tl = gsap.timeline({ onComplete: () => setLoading(false) })
@@ -265,6 +266,7 @@ const Index: NextPage = () => {
 
   React.useEffect(() => {
     if (window !== undefined && !loading && containerRef !== undefined) {
+      document.body.classList.remove('hidden')
       gsap.registerPlugin(ScrollTrigger)
       const tl = gsap.timeline()
       tl.to([containerRef.current], {
@@ -349,61 +351,55 @@ const Index: NextPage = () => {
     }
   }, [loading])
 
-  if (loading)
-    return (
-      <>
-        <Container>
-          <Stack
-            ref={loadingRef}
-            overflow='hidden'
-            width='full'
-            height='100vh'
-            maxW='100vw'
-            zIndex='banner'
-            position='fixed'
-            top='0'
-            bottom='0'
-            backgroundColor='gray.900'
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Heading
-              as='div'
-              size='xl'
-              opacity={0}
-              fontWeight='900'
-              color='white'
-              textAlign='center'
-              ref={titleLoadingRef}
-            >
-              Portofolio of{' '}
-              <Heading
-                size='xl'
-                fontWeight='900'
-                textAlign='center'
-                color='blue.500'
-              >
-                Nur Kholiq Ansori
-              </Heading>
-            </Heading>
-            <Stack
-              width='10px'
-              transform='translateX(-50%) translateY(-110%)'
-              height='full'
-              position='absolute'
-              top='0'
-              left='50%'
-              background='#fff'
-              ref={closingLoadingRef}
-            />
-          </Stack>
-        </Container>
-      </>
-    )
-
   return (
     <>
+      <Container>
+        <Stack
+          ref={loadingRef}
+          overflow='hidden'
+          width='full'
+          height='100vh'
+          maxW='100vw'
+          zIndex={999}
+          position='fixed'
+          top='0'
+          bottom='0'
+          backgroundColor='gray.900'
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <Heading
+            as='div'
+            size='xl'
+            opacity={0}
+            fontWeight='900'
+            color='white'
+            textAlign='center'
+            ref={titleLoadingRef}
+          >
+            Portofolio of{' '}
+            <Heading
+              size='xl'
+              fontWeight='900'
+              textAlign='center'
+              color='blue.500'
+            >
+              Nur Kholiq Ansori
+            </Heading>
+          </Heading>
+          <Stack
+            width='10px'
+            transform='translateX(-50%) translateY(-110%)'
+            height='full'
+            position='absolute'
+            top='0'
+            left='50%'
+            background='#fff'
+            ref={closingLoadingRef}
+          />
+        </Stack>
+      </Container>
       <div
         ref={containerRef}
         style={{ opacity: 0, translate: 'transformY(50px)' }}
