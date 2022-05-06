@@ -135,7 +135,6 @@ const iconProvider = [
 ]
 
 const Index: NextPage = () => {
-  const { loading, setLoading } = React.useContext(StateGlobalContext)
   const [dataRepo, setDataRepo] = React.useState<
     [
       {
@@ -221,6 +220,7 @@ const Index: NextPage = () => {
 
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
+  const { loading, setLoading } = React.useContext(StateGlobalContext)
 
   React.useEffect(() => {
     document.body.classList.add('hidden')
@@ -244,6 +244,7 @@ const Index: NextPage = () => {
           .to([closingLoadingRef.current], {
             duration: 0.5,
             translateY: -10,
+            width: '10px',
             skewX: '-60deg',
           })
           .to([closingLoadingRef.current], {
@@ -272,7 +273,7 @@ const Index: NextPage = () => {
       tl.to([containerRef.current], {
         opacity: 1,
       })
-        .call(() => aboutRef.current?.scrollIntoView({ behavior: 'smooth' }))
+        .call(() => bodyRef.current?.scrollIntoView({ behavior: 'smooth' }))
         .call(
           () =>
             headerRef.current?.scrollIntoView({
@@ -280,7 +281,7 @@ const Index: NextPage = () => {
               block: 'end',
             }),
           null,
-          '3',
+          '2',
         )
 
       // NAV TOP
@@ -389,7 +390,7 @@ const Index: NextPage = () => {
             </Heading>
           </Heading>
           <Stack
-            width='10px'
+            width='5px'
             transform='translateX(-50%) translateY(-110%)'
             height='full'
             position='absolute'
@@ -530,7 +531,7 @@ const Index: NextPage = () => {
             </Button>
           </Box>
           <div ref={bodyRef}>
-            <Hero apiProfile={dataProfile} apiReadme={dataReadme} />
+            <Hero ref={aboutRef} apiProfile={dataProfile} apiReadme={dataReadme} />
             <Main>
               <div id='portofolio' ref={portofolioRef}>
                 <Heading as='h2' mb='10' textAlign='center'>
@@ -967,7 +968,15 @@ const Index: NextPage = () => {
             </Main>
           </div>
           <DarkModeSwitch />
-          <Navigation />
+          <Navigation
+            aboutRef={aboutRef?.current}
+            portofolioRef={portofolioRef?.current}
+            personalProjectsRef={personalProjectsRef?.current}
+            repositoriesRef={repositoriesRef?.current}
+            headerRef={headerRef?.current}
+            footerWrapperRef={footerWrapperRef?.current}
+            cerfiticateRef={cerfiticateRef?.current}
+          />
           <div ref={footerWrapperRef}>
             <Footer>
               <Center flexDirection='column'>

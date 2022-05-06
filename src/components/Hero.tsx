@@ -13,13 +13,13 @@ import {
   useColorMode,
   Skeleton,
 } from '@chakra-ui/react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkHtml from 'remark-html'
 import { data } from '../api/data'
 
 type HeroProps = {
-  title: string
   apiProfile: {
     avatar_url: string
     name: string
@@ -28,9 +28,11 @@ type HeroProps = {
   apiReadme: {
     content: string
   }
+  children?: React.ReactNode
 }
 
-export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
+export const Hero = React.forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
+  const { apiProfile, apiReadme, children }= props
   const avatarUrl = apiProfile.avatar_url
   const name = apiProfile.name
   const location = apiProfile.location
@@ -58,6 +60,7 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
 
   return (
     <Box
+      ref={ref}
       id='about'
       px='1rem'
       mx='auto'
@@ -198,8 +201,4 @@ export const Hero = ({ title, apiProfile, apiReadme }: HeroProps) => {
       </Box>
     </Box>
   )
-}
-
-Hero.defaultProps = {
-  title: 'Nur Kholiq Ansori',
-}
+})

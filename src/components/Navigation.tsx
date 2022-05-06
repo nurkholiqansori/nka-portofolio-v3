@@ -1,7 +1,15 @@
 import { Grid, Heading, Link, Stack, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  aboutRef: HTMLDivElement
+  portofolioRef: HTMLDivElement
+  personalProjectsRef: HTMLDivElement
+  repositoriesRef: HTMLDivElement
+  headerRef: HTMLDivElement
+  footerWrapperRef: HTMLDivElement
+  cerfiticateRef: HTMLDivElement
+}
 
 const Navigation = (props: Props) => {
   return (
@@ -49,38 +57,67 @@ const Navigation = (props: Props) => {
         }}
       >
         <li style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-          <Stack as='span' height='1px' width='10px' background={useColorModeValue('#000', '#fff')} transformOrigin='0 50%' transition='translate-x .25s' />
+          <Stack
+            as='span'
+            height='1px'
+            width='10px'
+            background={useColorModeValue('#000', '#fff')}
+            transformOrigin='0 50%'
+            transition='translate-x .25s'
+          />
           <Link
             // _hover={{ ml: '5px', translateX: '0' }}
             position='relative'
-            href='#about'
             fontSize='12px'
             translateX='25px'
+            onClick={() =>
+              props.aboutRef?.scrollIntoView({ behavior: 'smooth' })
+            }
           >
             {' '}
             ABOUT{' '}
           </Link>
         </li>
         <li>
-          <Link href='#about' fontSize='12px'>
+          <Link
+            onClick={() =>
+              props.portofolioRef?.scrollIntoView({ behavior: 'smooth' })
+            }
+            fontSize='12px'
+          >
             {' '}
             PORTOFOLIO{' '}
           </Link>
         </li>
         <li>
-          <Link href='#about' fontSize='12px'>
+          <Link
+            onClick={() =>
+              props.personalProjectsRef?.scrollIntoView({ behavior: 'smooth' })
+            }
+            fontSize='12px'
+          >
             {' '}
             PERSONAL PROJECTS{' '}
           </Link>
         </li>
         <li>
-          <Link href='#about' fontSize='12px'>
+          <Link
+            onClick={() =>
+              props.repositoriesRef?.scrollIntoView({ behavior: 'smooth' })
+            }
+            fontSize='12px'
+          >
             {' '}
             REPOSITORIES{' '}
           </Link>
         </li>
         <li>
-          <Link href='#about' fontSize='12px'>
+          <Link
+            onClick={() =>
+              props.cerfiticateRef?.scrollIntoView({ behavior: 'smooth' })
+            }
+            fontSize='12px'
+          >
             {' '}
             CERTIFICATE{' '}
           </Link>
