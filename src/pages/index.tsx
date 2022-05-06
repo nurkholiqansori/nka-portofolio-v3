@@ -24,6 +24,8 @@ import Link from 'next/link'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Navigation from '../components/Navigation'
+import { StateGlobalContext } from '../context/StateGlobalContext'
+import { NextPage } from 'next'
 
 const iconBuild = [
   {
@@ -132,7 +134,8 @@ const iconProvider = [
   },
 ]
 
-const Index = () => {
+const Index: NextPage = () => {
+  const { loading, setLoading } = React.useContext(StateGlobalContext)
   const [dataRepo, setDataRepo] = React.useState<
     [
       {
@@ -170,7 +173,6 @@ const Index = () => {
   }>({
     content: '',
   })
-  const [loading, setLoading] = React.useState<boolean>(true)
 
   React.useEffect(() => {
     fetch('https://api.github.com/users/nurkholiqansori/repos')
@@ -279,17 +281,64 @@ const Index = () => {
           '3',
         )
 
+      // NAV TOP
+      ScrollTrigger.create({
+        trigger: navRef?.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setNavActive(true),
+        onLeave: () => setNavActive(false),
+        onEnterBack: () => setNavActive(true),
+        onLeaveBack: () => setNavActive(false),
+      })
+
       // ABOUT
+      ScrollTrigger.create({
+        trigger: aboutRef?.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setAboutActive(true),
+        onLeave: () => setAboutActive(false),
+        onEnterBack: () => setAboutActive(true),
+        onLeaveBack: () => setAboutActive(false),
+      })
 
       // PORTOFOLIO
+      ScrollTrigger.create({
+        trigger: portofolioRef?.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setPortofolioActive(true),
+        onLeave: () => setPortofolioActive(false),
+        onEnterBack: () => setPortofolioActive(true),
+        onLeaveBack: () => setPortofolioActive(false),
+      })
 
       // PERSONAL PROJECTS
+      ScrollTrigger.create({
+        trigger: personalProjectsRef?.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setPersonalProjectsActive(true),
+        onLeave: () => setPersonalProjectsActive(false),
+        onEnterBack: () => setPersonalProjectsActive(true),
+        onLeaveBack: () => setPersonalProjectsActive(false),
+      })
 
       // REPOSITORIES
+      ScrollTrigger.create({
+        trigger: repositoriesRef?.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => setRepositoriesActive(true),
+        onLeave: () => setRepositoriesActive(false),
+        onEnterBack: () => setRepositoriesActive(true),
+        onLeaveBack: () => setRepositoriesActive(false),
+      })
 
       // CERFITICATE
       ScrollTrigger.create({
-        trigger: cerfiticateRef.current,
+        trigger: cerfiticateRef?.current,
         start: 'top top',
         end: 'bottom bottom',
         onEnter: () => setCerfiticateActive(true),

@@ -82,6 +82,7 @@ export const Container = (props: FlexProps) => {
       />
       
       <Box
+        as='main'
         direction='column'
         alignItems='center'
         justifyContent='flex-start'
