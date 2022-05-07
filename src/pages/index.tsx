@@ -204,6 +204,8 @@ const Index: NextPage = () => {
   // LOADING REF
   const loadingRef = React.useRef<HTMLDivElement>(null)
   const titleLoadingRef = React.useRef<HTMLDivElement>(null)
+  const subtitleLoading1Ref = React.useRef<HTMLDivElement>(null)
+  const subtitleLoading2Ref = React.useRef<HTMLDivElement>(null)
   const closingLoadingRef = React.useRef<HTMLDivElement>(null)
 
   // ACTIVE STATE
@@ -229,10 +231,11 @@ const Index: NextPage = () => {
       const tl = gsap.timeline({ onComplete: () => setLoading(false) })
 
       if (loading) {
-        tl.to([titleLoadingRef.current], {
+        tl.to([subtitleLoading1Ref?.current, subtitleLoading2Ref?.current], {
           delay: 1,
-          duration: 0.5,
+          duration: 1.2,
           opacity: 1,
+          left: 0,
           stagger: 0.2,
           ease: 'power3.inOut',
         })
@@ -256,6 +259,8 @@ const Index: NextPage = () => {
               closingLoadingRef.current,
               loadingRef.current,
               titleLoadingRef.current,
+        subtitleLoading1Ref.current,
+        subtitleLoading2Ref.current,
             ],
             {
               display: 'none',
@@ -287,8 +292,8 @@ const Index: NextPage = () => {
       // NAV TOP
       ScrollTrigger.create({
         trigger: navRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
+        start: 100,
+        end: 50,
         onEnter: () => setNavActive(true),
         onLeave: () => setNavActive(false),
         onEnterBack: () => setNavActive(true),
@@ -352,6 +357,17 @@ const Index: NextPage = () => {
     }
   }, [loading])
 
+  console.log({
+    nav: navActive,
+    about: aboutActive,
+    portofolio: portofolioActive,
+    personal: personalProjectsActive,
+    repositories: repositoriesActive,
+    certificate: cerfiticateActive,
+    footer: footerActive,
+  })
+  
+
   return (
     <>
       <Container>
@@ -373,18 +389,30 @@ const Index: NextPage = () => {
           <Heading
             as='div'
             size='xl'
-            opacity={0}
             fontWeight='900'
+            transform='rotate(-90deg)'
             color='white'
             textAlign='center'
             ref={titleLoadingRef}
           >
-            Portofolio of{' '}
+            <p
+              ref={subtitleLoading1Ref}
+              style={{
+                position: 'relative',
+                left: '200%',
+                marginBottom: '20px',
+              }}
+            >
+              Portofolio of{' '}
+            </p>
             <Heading
+              ref={subtitleLoading2Ref}
               size='xl'
               fontWeight='900'
               textAlign='center'
               color='blue.500'
+              position='relative'
+              left='-200%'
             >
               Nur Kholiq Ansori
             </Heading>
