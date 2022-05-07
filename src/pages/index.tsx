@@ -132,9 +132,7 @@ const iconProvider = [
   },
 ]
 
-const Index: NextPage = () => { 
-
-
+const Index: NextPage = () => {
   // BODY REF
   const aboutRef = React.useRef<HTMLDivElement>(null)
   const portofolioRef = React.useRef<HTMLDivElement>(null)
@@ -154,16 +152,8 @@ const Index: NextPage = () => {
   const subtitleLoading2Ref = React.useRef<HTMLDivElement>(null)
   const closingLoadingRef = React.useRef<HTMLDivElement>(null)
 
-  // ACTIVE STATE
-  const [navActive, setNavActive] = React.useState<boolean>(false)
-  const [aboutActive, setAboutActive] = React.useState<boolean>(false)
-  const [personalProjectsActive, setPersonalProjectsActive] =
-    React.useState<boolean>(false)
-  const [cerfiticateActive, setCerfiticateActive] =
-    React.useState<boolean>(false)
-  const [footerActive, setFooterActive] = React.useState<boolean>(false)
-
-  const { loading, setLoading, dataProfile, dataReadme, getAllData } = React.useContext(StateGlobalContext)
+  const { loading, setLoading, dataProfile, dataReadme, getAllData } =
+    React.useContext(StateGlobalContext)
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
 
@@ -235,50 +225,6 @@ const Index: NextPage = () => {
           null,
           '2',
         )
-
-      // NAV TOP
-      ScrollTrigger.create({
-        trigger: navRef?.current,
-        start: 100,
-        end: 50,
-        onEnter: () => setNavActive(true),
-        onLeave: () => setNavActive(false),
-        onEnterBack: () => setNavActive(true),
-        onLeaveBack: () => setNavActive(false),
-      })
-
-      // ABOUT
-      ScrollTrigger.create({
-        trigger: aboutRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => setAboutActive(true),
-        onLeave: () => setAboutActive(false),
-        onEnterBack: () => setAboutActive(true),
-        onLeaveBack: () => setAboutActive(false),
-      })
-
-      // PERSONAL PROJECTS
-      ScrollTrigger.create({
-        trigger: personalProjectsRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => setPersonalProjectsActive(true),
-        onLeave: () => setPersonalProjectsActive(false),
-        onEnterBack: () => setPersonalProjectsActive(true),
-        onLeaveBack: () => setPersonalProjectsActive(false),
-      })
-
-      // CERFITICATE
-      ScrollTrigger.create({
-        trigger: cerfiticateRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => setCerfiticateActive(true),
-        onLeave: () => setCerfiticateActive(false),
-        onEnterBack: () => setCerfiticateActive(true),
-        onLeaveBack: () => setCerfiticateActive(false),
-      })
     }
   }, [loading])
 
@@ -289,7 +235,6 @@ const Index: NextPage = () => {
   //   certificate: cerfiticateActive,
   //   footer: footerActive,
   // })
-    
 
   return (
     <>
