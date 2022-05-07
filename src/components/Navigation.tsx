@@ -109,13 +109,12 @@ const Navigation = (props: Props) => {
             transition='translate-x .25s'
           />
           <Link
+            as='span'
             // _hover={{ ml: '5px', translateX: '0' }}
             position='relative'
             fontSize='12px'
             translateX='25px'
-            onClick={() =>
-              aboutRef?.scrollIntoView({ behavior: 'smooth' })
-            }
+            onClick={() => aboutRef?.scrollIntoView({ behavior: 'smooth' })}
           >
             {' '}
             ABOUT{' '}
@@ -123,6 +122,7 @@ const Navigation = (props: Props) => {
         </li>
         <li>
           <Link
+            as='span'
             onClick={() =>
               portofolioRef?.scrollIntoView({ behavior: 'smooth' })
             }
@@ -134,6 +134,7 @@ const Navigation = (props: Props) => {
         </li>
         <li>
           <Link
+            as='span'
             onClick={() =>
               personalProjectsRef?.scrollIntoView({ behavior: 'smooth' })
             }
@@ -145,6 +146,7 @@ const Navigation = (props: Props) => {
         </li>
         <li>
           <Link
+            as='span'
             onClick={() =>
               cerfiticateRef?.scrollIntoView({ behavior: 'smooth' })
             }

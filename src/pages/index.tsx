@@ -24,6 +24,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Navigation from '../components/Navigation'
 import { StateGlobalContext } from '../context/StateGlobalContext'
 import { NextPage } from 'next'
+import Title from '../components/Title'
 
 const iconBuild = [
   {
@@ -420,9 +421,7 @@ const Index: NextPage = () => {
             <Stack px='1rem' gap={5}>
               <div id='portofolio' ref={portofolioRef}>
                 <Main>
-                  <Heading as='h2' mb='10' textAlign='center'>
-                    Portofolio
-                  </Heading>
+                  <Title>Portofolio</Title>
                   <Stack gap={2}>
                     {data.experience.map((i) => (
                       <Center py={5} key={i.com}>
@@ -513,9 +512,7 @@ const Index: NextPage = () => {
               <Stack gap={5}>
                 <div id='personal-project' ref={personalProjectsRef}>
                   <Main>
-                    <Heading as='h2' my='10' textAlign='center'>
-                      Personal Project
-                    </Heading>
+                    <Title>Personal Project</Title>
                     <Stack gap={2}>
                       {data.personalProjects.map((i) => (
                         <Center py={5} key={i.title}>
@@ -661,9 +658,7 @@ const Index: NextPage = () => {
               <Stack gap={5}>
                 <div id='certificate' ref={cerfiticateRef}>
                   <Main>
-                    <Heading as='h2' my='24' textAlign='center'>
-                      Certificate
-                    </Heading>
+                    <Title>Certificate</Title>
                     <Stack gap={2}>
                       {data.skill
                         .slice()
@@ -759,6 +754,7 @@ const Index: NextPage = () => {
                 <Text>Build with ❤️ by Nur Kholiq Ansori</Text>
                 <Box my='5'>
                   <Image
+                    alt='powered-by-vercel'
                     src='/1618983297-powered-by-vercel.svg'
                     width='120'
                     height='25'
