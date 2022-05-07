@@ -28,9 +28,7 @@ const Navigation = (props: Props) => {
   const navigationRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    if (window !== undefined) {
-      console.log('anu');
-      
+    if (window !== undefined) {      
       // gsap.registerPlugin(ScrollTrigger)
       // gsap.to(navigationRef?.current, {
       //   scrollTrigger: {

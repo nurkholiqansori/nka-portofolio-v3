@@ -5,10 +5,8 @@ import {
   Stack,
   Button,
   Icon,
-  Badge,
   Center,
   useColorMode,
-  Skeleton,
   useColorModeValue,
   Image,
 } from '@chakra-ui/react'
@@ -284,16 +282,14 @@ const Index: NextPage = () => {
     }
   }, [loading])
 
-  console.log({
-    nav: navActive,
-    about: aboutActive,
-    personal: personalProjectsActive,
-    certificate: cerfiticateActive,
-    footer: footerActive,
-  })
-  
-  console.log(loading, setLoading)
-  
+  // console.log({
+  //   nav: navActive,
+  //   about: aboutActive,
+  //   personal: personalProjectsActive,
+  //   certificate: cerfiticateActive,
+  //   footer: footerActive,
+  // })
+    
 
   return (
     <>
