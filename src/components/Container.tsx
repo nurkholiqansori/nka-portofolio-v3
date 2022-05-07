@@ -9,10 +9,10 @@ export const Container = (props: FlexProps) => {
   return (
     <>
       <NextSeo
-        title='My Personal Web Page'
+        title='Portofolio of Nur Kholiq Ansori'
         description="My Name is Nur Kholiq Ansori, I'm a Computer Science who likes Javascript Framework"
         openGraph={{
-          title: 'My Personal Web Page',
+          title: 'Portofolio of Nur Kholiq Ansori',
           description:
             "My Name is Nur Kholiq Ansori, I'm a Computer Science who likes Javascript Framework",
           images: [
@@ -24,7 +24,7 @@ export const Container = (props: FlexProps) => {
               type: 'image/png',
             },
           ],
-          site_name: 'My Personal Web Page',
+          site_name: 'Portofolio of Nur Kholiq Ansori',
           profile: {
             firstName: 'Nur Kholiq',
             lastName: 'Ansori',
@@ -47,7 +47,7 @@ export const Container = (props: FlexProps) => {
           },
           {
             name: 'keywords',
-            content: 'Nur Kholiq Ansori, personal web page, personal website',
+            content: 'Nur Kholiq Ansori, nur, kholiq, ansori, personal web page, personal website',
           },
           {
             name: 'author',
@@ -80,7 +80,7 @@ export const Container = (props: FlexProps) => {
           'http://www.linkedin.com/in/nurkholiqansori',
         ]}
       />
-      
+
       <Box
         as='main'
         direction='column'
