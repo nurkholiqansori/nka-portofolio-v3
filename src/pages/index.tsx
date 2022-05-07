@@ -134,37 +134,8 @@ const iconProvider = [
   },
 ]
 
-const Index: NextPage = () => {
-  const [dataProfile, setDataProfile] = React.useState<{
-    [key: string]: string
-    avatar_url: string
-    name: string
-    location: string
-  }>({
-    avatar_url: '',
-    name: '',
-    location: '',
-  })
-  const [dataReadme, setDataReadme] = React.useState<{
-    [key: string]: string
-    content: string
-  }>({
-    content: '',
-  })
+const Index: NextPage = () => { 
 
-  console.log(dataProfile)
-  
-
-  React.useEffect(() => {
-    fetch('https://api.github.com/users/nurkholiqansori')
-      .then((response) => response.json())
-      .then((result) => setDataProfile(result))
-      .catch((error) => console.log('error', error))
-    fetch('https://api.github.com/repos/nurkholiqansori/nurkholiqansori/readme')
-      .then((response) => response.json())
-      .then((result) => setDataReadme(result))
-      .catch((error) => console.log('error', error))
-  }, [])
 
   // BODY REF
   const aboutRef = React.useRef<HTMLDivElement>(null)
@@ -194,11 +165,12 @@ const Index: NextPage = () => {
     React.useState<boolean>(false)
   const [footerActive, setFooterActive] = React.useState<boolean>(false)
 
-  const { loading, setLoading } = React.useContext(StateGlobalContext)
+  const { loading, setLoading, dataProfile, dataReadme, getAllData } = React.useContext(StateGlobalContext)
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
 
   React.useEffect(() => {
+    getAllData()
     document.body.classList.add('hidden')
     if (window !== undefined) {
       const width = window.innerWidth < 768 ? '500%' : '200%'
@@ -319,6 +291,9 @@ const Index: NextPage = () => {
     certificate: cerfiticateActive,
     footer: footerActive,
   })
+  
+  console.log(loading, setLoading)
+  
 
   return (
     <>
