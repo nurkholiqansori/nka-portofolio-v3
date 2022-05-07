@@ -135,27 +135,6 @@ const iconProvider = [
 ]
 
 const Index: NextPage = () => {
-  const [dataRepo, setDataRepo] = React.useState<
-    [
-      {
-        name: string
-        description: string
-        topics: [string]
-        homepage: string
-        html_url: string
-        language: string
-      },
-    ]
-  >([
-    {
-      name: '',
-      description: '',
-      topics: [''],
-      homepage: '',
-      html_url: '',
-      language: '',
-    },
-  ])
   const [dataProfile, setDataProfile] = React.useState<{
     [key: string]: string
     avatar_url: string
@@ -173,11 +152,10 @@ const Index: NextPage = () => {
     content: '',
   })
 
+  console.log(dataProfile)
+  
+
   React.useEffect(() => {
-    fetch('https://api.github.com/users/nurkholiqansori/repos')
-      .then((response) => response.json())
-      .then((result) => setDataRepo(result))
-      .catch((error) => console.log('error', error))
     fetch('https://api.github.com/users/nurkholiqansori')
       .then((response) => response.json())
       .then((result) => setDataProfile(result))
@@ -192,7 +170,6 @@ const Index: NextPage = () => {
   const aboutRef = React.useRef<HTMLDivElement>(null)
   const portofolioRef = React.useRef<HTMLDivElement>(null)
   const personalProjectsRef = React.useRef<HTMLDivElement>(null)
-  const repositoriesRef = React.useRef<HTMLDivElement>(null)
   const cerfiticateRef = React.useRef<HTMLDivElement>(null)
   const footerRef = React.useRef<HTMLDivElement>(null)
   const headerRef = React.useRef<HTMLDivElement>(null)
@@ -211,24 +188,24 @@ const Index: NextPage = () => {
   // ACTIVE STATE
   const [navActive, setNavActive] = React.useState<boolean>(false)
   const [aboutActive, setAboutActive] = React.useState<boolean>(false)
-  const [portofolioActive, setPortofolioActive] = React.useState<boolean>(false)
   const [personalProjectsActive, setPersonalProjectsActive] =
-    React.useState<boolean>(false)
-  const [repositoriesActive, setRepositoriesActive] =
     React.useState<boolean>(false)
   const [cerfiticateActive, setCerfiticateActive] =
     React.useState<boolean>(false)
   const [footerActive, setFooterActive] = React.useState<boolean>(false)
 
+  const { loading, setLoading } = React.useContext(StateGlobalContext)
   const { colorMode } = useColorMode()
   const bgColor = { light: 'blackAlpha', dark: 'whiteAlpha' }
-  const { loading, setLoading } = React.useContext(StateGlobalContext)
 
   React.useEffect(() => {
     document.body.classList.add('hidden')
     if (window !== undefined) {
       const width = window.innerWidth < 768 ? '500%' : '200%'
-      const tl = gsap.timeline({ onComplete: () => setLoading(false) })
+      const tl = gsap.timeline({
+        smoothChildTiming: true,
+        onComplete: () => setLoading(false),
+      })
 
       if (loading) {
         tl.to([subtitleLoading1Ref?.current, subtitleLoading2Ref?.current], {
@@ -259,8 +236,8 @@ const Index: NextPage = () => {
               closingLoadingRef.current,
               loadingRef.current,
               titleLoadingRef.current,
-        subtitleLoading1Ref.current,
-        subtitleLoading2Ref.current,
+              subtitleLoading1Ref.current,
+              subtitleLoading2Ref.current,
             ],
             {
               display: 'none',
@@ -311,17 +288,6 @@ const Index: NextPage = () => {
         onLeaveBack: () => setAboutActive(false),
       })
 
-      // PORTOFOLIO
-      ScrollTrigger.create({
-        trigger: portofolioRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => setPortofolioActive(true),
-        onLeave: () => setPortofolioActive(false),
-        onEnterBack: () => setPortofolioActive(true),
-        onLeaveBack: () => setPortofolioActive(false),
-      })
-
       // PERSONAL PROJECTS
       ScrollTrigger.create({
         trigger: personalProjectsRef?.current,
@@ -331,17 +297,6 @@ const Index: NextPage = () => {
         onLeave: () => setPersonalProjectsActive(false),
         onEnterBack: () => setPersonalProjectsActive(true),
         onLeaveBack: () => setPersonalProjectsActive(false),
-      })
-
-      // REPOSITORIES
-      ScrollTrigger.create({
-        trigger: repositoriesRef?.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => setRepositoriesActive(true),
-        onLeave: () => setRepositoriesActive(false),
-        onEnterBack: () => setRepositoriesActive(true),
-        onLeaveBack: () => setRepositoriesActive(false),
       })
 
       // CERFITICATE
@@ -360,13 +315,10 @@ const Index: NextPage = () => {
   console.log({
     nav: navActive,
     about: aboutActive,
-    portofolio: portofolioActive,
     personal: personalProjectsActive,
-    repositories: repositoriesActive,
     certificate: cerfiticateActive,
     footer: footerActive,
   })
-  
 
   return (
     <>
@@ -508,21 +460,6 @@ const Index: NextPage = () => {
               }
             >
               Personal Project
-            </Button>
-            <Button
-              rounded={'full'}
-              size={'lg'}
-              fontWeight={'medium'}
-              px={6}
-              color={'white'}
-              colorScheme={bgColor[colorMode]}
-              bg={'blue.400'}
-              _hover={{ bg: 'blue.500' }}
-              onClick={() =>
-                repositoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
-              }
-            >
-              Repositories
             </Button>
             <Button
               rounded={'full'}
@@ -806,129 +743,6 @@ const Index: NextPage = () => {
                 </div>
               </Stack>
               <Stack gap={5}>
-                <div id='repositories' ref={repositoriesRef}>
-                  <Main>
-                    <Heading as='h2' my='10' textAlign='center'>
-                      Repositories
-                    </Heading>
-                    <Stack gap={2}>
-                      {dataRepo[0].name ? (
-                        dataRepo.map((i) => (
-                          <Center py={5} key={i.name}>
-                            <Box
-                              w={'full'}
-                              bg={useColorModeValue('white', 'gray.900')}
-                              boxShadow={'2xl'}
-                              rounded={'md'}
-                              p={6}
-                              overflow={'hidden'}
-                            >
-                              <Stack>
-                                <Text
-                                  color={'blue.500'}
-                                  textTransform={'uppercase'}
-                                  fontWeight={800}
-                                  fontSize={'sm'}
-                                  letterSpacing={1.1}
-                                >
-                                  {i.language}
-                                </Text>
-                                <Heading
-                                  color={useColorModeValue('gray.700', 'white')}
-                                  fontSize={'2xl'}
-                                  fontFamily={'body'}
-                                >
-                                  {i.name}
-                                </Heading>
-                                <Stack
-                                  direction='row'
-                                  my='3'
-                                  flexWrap='wrap'
-                                  gap={2}
-                                >
-                                  {i.topics.map((is: string) => (
-                                    <Badge colorScheme='purple' key={is}>
-                                      {is}
-                                    </Badge>
-                                  ))}
-                                </Stack>
-                                <Text as='p'>{i.description}</Text>
-                              </Stack>
-                              <Stack
-                                mt={6}
-                                direction={'row'}
-                                gap={4}
-                                flexWrap={'wrap'}
-                                align={'center'}
-                              >
-                                {i.homepage && (
-                                  <Link href={i.homepage}>
-                                    <a
-                                      target='_blank'
-                                      rel='noopener noreferrer'
-                                    >
-                                      <Button
-                                        rounded={'full'}
-                                        size='md'
-                                        fontWeight={'medium'}
-                                        px={6}
-                                        color={'white'}
-                                        colorScheme={bgColor[colorMode]}
-                                        bg={'blue.400'}
-                                        _hover={{ bg: 'blue.500' }}
-                                      >
-                                        Homepage
-                                      </Button>
-                                    </a>
-                                  </Link>
-                                )}
-                                <Link href={i.html_url}>
-                                  <a target='_blank' rel='noopener noreferrer'>
-                                    <Button
-                                      rounded={'full'}
-                                      size='md'
-                                      fontWeight={'medium'}
-                                      px={6}
-                                      color={'white'}
-                                      colorScheme={bgColor[colorMode]}
-                                      bg={'blue.400'}
-                                      _hover={{ bg: 'blue.500' }}
-                                      leftIcon={
-                                        <Icon
-                                          fill='currentColor'
-                                          viewBox='0 0 24 24'
-                                          fontSize='20'
-                                          stroke='currentColor'
-                                        >
-                                          <path
-                                            strokeLinecap='round'
-                                            strokeLinejoin='round'
-                                            stroke='none'
-                                            d={siGithub.path}
-                                          />
-                                        </Icon>
-                                      }
-                                    >
-                                      Repositories
-                                    </Button>
-                                  </a>
-                                </Link>
-                              </Stack>
-                            </Box>
-                          </Center>
-                        ))
-                      ) : (
-                        <>
-                          <Skeleton width='200' height='100' />
-                          <Skeleton width='200' height='100' />
-                          <Skeleton width='200' height='100' />
-                        </>
-                      )}
-                    </Stack>
-                  </Main>
-                </div>
-              </Stack>
-              <Stack gap={5}>
                 <div id='certificate' ref={cerfiticateRef}>
                   <Main>
                     <Heading as='h2' my='24' textAlign='center'>
@@ -1019,7 +833,6 @@ const Index: NextPage = () => {
             aboutRef={aboutRef?.current}
             portofolioRef={portofolioRef?.current}
             personalProjectsRef={personalProjectsRef?.current}
-            repositoriesRef={repositoriesRef?.current}
             headerRef={headerRef?.current}
             footerWrapperRef={footerWrapperRef?.current}
             cerfiticateRef={cerfiticateRef?.current}

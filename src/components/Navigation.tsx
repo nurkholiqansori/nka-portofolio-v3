@@ -1,23 +1,68 @@
 import { Grid, Heading, Link, Stack, useColorModeValue } from '@chakra-ui/react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import React from 'react'
+import { StateGlobalContext } from '../context/StateGlobalContext'
 
 type Props = {
   aboutRef: HTMLDivElement
   portofolioRef: HTMLDivElement
   personalProjectsRef: HTMLDivElement
-  repositoriesRef: HTMLDivElement
   headerRef: HTMLDivElement
   footerWrapperRef: HTMLDivElement
   cerfiticateRef: HTMLDivElement
 }
 
 const Navigation = (props: Props) => {
+  const {
+    aboutRef,
+    portofolioRef,
+    personalProjectsRef,
+    headerRef,
+    footerWrapperRef,
+    cerfiticateRef,
+  } = props
+
+  const { loading } = React.useContext(StateGlobalContext)
+
+  const navigationRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (window !== undefined) {
+      console.log('anu');
+      
+      // gsap.registerPlugin(ScrollTrigger)
+      // gsap.to(navigationRef?.current, {
+      //   scrollTrigger: {
+      //     trigger: aboutRef,
+      //     start: 'top top',
+      //     end: '20px 80%',
+      //     pin: true,
+      //     scrub: 0.5,
+      //   },
+      //   duration: 1,
+      //   right: '5%',
+      //   opacity: 1,
+      //   ease: 'power3.out',
+      // })
+      // ScrollTrigger.create({
+      //   trigger: aboutRef,
+      //   start: 'top top',
+      //   end: '20px 80%',
+      //   scrub: true,
+      //   onEnter: () => console.log('enter'),
+      // })
+    }
+  }, [loading])
+
   return (
     <Grid
       as='nav'
+      ref={navigationRef}
       position='fixed'
       bottom='5%'
-      right='5%'
+      right='-10%'
+      opacity={0}
       zIndex={1}
       gap={3}
       gridTemplateColumns='repeat(2, 1fr)'
@@ -71,7 +116,7 @@ const Navigation = (props: Props) => {
             fontSize='12px'
             translateX='25px'
             onClick={() =>
-              props.aboutRef?.scrollIntoView({ behavior: 'smooth' })
+              aboutRef?.scrollIntoView({ behavior: 'smooth' })
             }
           >
             {' '}
@@ -81,7 +126,7 @@ const Navigation = (props: Props) => {
         <li>
           <Link
             onClick={() =>
-              props.portofolioRef?.scrollIntoView({ behavior: 'smooth' })
+              portofolioRef?.scrollIntoView({ behavior: 'smooth' })
             }
             fontSize='12px'
           >
@@ -92,7 +137,7 @@ const Navigation = (props: Props) => {
         <li>
           <Link
             onClick={() =>
-              props.personalProjectsRef?.scrollIntoView({ behavior: 'smooth' })
+              personalProjectsRef?.scrollIntoView({ behavior: 'smooth' })
             }
             fontSize='12px'
           >
@@ -103,18 +148,7 @@ const Navigation = (props: Props) => {
         <li>
           <Link
             onClick={() =>
-              props.repositoriesRef?.scrollIntoView({ behavior: 'smooth' })
-            }
-            fontSize='12px'
-          >
-            {' '}
-            REPOSITORIES{' '}
-          </Link>
-        </li>
-        <li>
-          <Link
-            onClick={() =>
-              props.cerfiticateRef?.scrollIntoView({ behavior: 'smooth' })
+              cerfiticateRef?.scrollIntoView({ behavior: 'smooth' })
             }
             fontSize='12px'
           >
