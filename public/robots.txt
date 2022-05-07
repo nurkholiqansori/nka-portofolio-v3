@@ -1,0 +1,7 @@
+User-agent: Googlebot
+Disallow: /doc/
+
+User-agent: *
+Allow: /
+
+Sitemap: http://www.nurkholiqansori.me/sitemap.xml
